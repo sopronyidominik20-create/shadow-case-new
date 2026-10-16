@@ -1,200 +1,140 @@
+```html
 <!DOCTYPE html>
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090b10">
-<title>SHADOW CASE | Nyomozz. Derítsd ki. Győzz.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHADOW CASE – Nyomozói központ</title>
 <style>
-:root {
-  color-scheme: dark;
-  --bg: #090b10;
-  --panel: #121722;
-  --border: #293244;
-  --text: #f3f5fa;
-  --muted: #9ba7ba;
-  --gold: #d5ad63;
-  --red: #e45d62;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
-  min-height: 100vh;
-}
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  padding: 20px 6%;
-  border-bottom: 1px solid var(--border);
-}
-.logo {
-  font-size: 21px;
-  font-weight: 900;
-  letter-spacing: 3px;
-}
-.logo span { color: var(--gold); }
-.badge {
-  color: var(--gold);
-  border: 1px solid #6b5634;
-  padding: 7px 10px;
-  font-size: 10px;
-  letter-spacing: 2px;
-}
-main {
-  max-width: 1000px;
-  margin: auto;
-  padding: 55px 20px;
-}
-.eyebrow {
-  color: var(--gold);
-  font-size: 11px;
-  letter-spacing: 4px;
-  font-weight: bold;
-}
-h1 {
-  font-size: clamp(38px, 8vw, 72px);
-  line-height: 1.02;
-  margin: 18px 0;
-  letter-spacing: -2px;
-}
-h1 span { color: var(--gold); }
-.intro {
-  color: var(--muted);
-  line-height: 1.8;
-  max-width: 600px;
-  font-size: 16px;
-}
-.notice {
-  border-left: 3px solid var(--gold);
-  background: #171923;
-  padding: 15px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
-  margin: 25px 0;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 35px;
-}
-.card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 24px;
-  border-radius: 8px;
-}
-.icon { font-size: 27px; }
-.card h2 { font-size: 17px; }
-.card p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.7;
-}
-button {
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: 5px;
-  border: 1px solid var(--gold);
-  background: var(--gold);
-  color: #111;
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-button.secondary {
-  background: transparent;
-  color: var(--text);
-  border-color: var(--border);
-}
-button:hover { filter: brightness(1.1); }
-footer {
-  border-top: 1px solid var(--border);
-  text-align: center;
-  color: var(--muted);
-  padding: 25px 15px;
-  font-size: 12px;
-}
-#message {
-  display: none;
-  margin-top: 20px;
-  padding: 15px;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  line-height: 1.6;
-}
+*{box-sizing:border-box}
+body{margin:0;background:#090b10;color:#f3f5fa;font-family:Arial,sans-serif}
+header{padding:22px 6%;border-bottom:1px solid #293244;font-weight:900;letter-spacing:3px}
+header span,h1 span{color:#d5ad63}
+main{max-width:900px;margin:auto;padding:45px 20px}
+.eyebrow{color:#d5ad63;letter-spacing:3px;font-size:11px}
+h1{font-size:clamp(38px,8vw,68px);line-height:1.05}
+p{color:#aab3c2;line-height:1.7}
+.panel,.card{background:#121722;border:1px solid #293244;border-radius:8px;padding:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:24px 0}
+label{display:block;margin-top:14px;font-size:13px;color:#aab3c2}
+input{width:100%;margin-top:7px;padding:13px;background:#090b10;color:white;border:1px solid #394357;border-radius:5px}
+button{width:100%;padding:13px;margin-top:12px;background:#d5ad63;color:#111;border:0;border-radius:5px;font-weight:bold;cursor:pointer}
+button.secondary{background:transparent;color:white;border:1px solid #394357}
+#status{display:none;margin-top:15px;padding:12px;border:1px solid #394357;overflow-wrap:anywhere}
+footer{text-align:center;color:#8993a4;padding:25px;border-top:1px solid #293244;font-size:12px}
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">SHADOW <span>CASE</span></div>
-  <div class="badge">BIZALMAS AKTÁK</div>
-</header>
-
+<header>SHADOW <span>CASE</span></header>
 <main>
-  <div class="eyebrow">AZ IGAZSÁG A RÉSZLETEKBEN REJLIK</div>
-  <h1>MINDENKINEK<br>VAN <span>TITKA.</span></h1>
-  <p class="intro">
-    Egy megoldatlan ügy. Egy sor gyanúsított. Rengeteg hazugság.
-    Vizsgáld meg a bizonyítékokat, keresd az ellentmondásokat,
-    és derítsd ki, mi történt valójában.
-  </p>
-
-  <div class="notice">
-    <strong>NYOMOZÓI KÖZLEMÉNY</strong><br>
-    Az akták előkészítés alatt állnak. Hamarosan megkezdheted
-    az első ügy kivizsgálását.
-  </div>
-
-  <section class="grid">
-    <article class="card">
-      <div class="icon">🕵️</div>
-      <h2>Nyomozás</h2>
-      <p>Elemezd a vallomásokat, keresd a bizonyítékokat,
-      és rakd össze a történet darabjait.</p>
-    </article>
-    <article class="card">
-      <div class="icon">📁</div>
-      <h2>Akták</h2>
-      <p>Minden ügy új rejtély. Figyelj a részletekre,
-      mert egy apró nyom mindent megváltoztathat.</p>
-    </article>
-    <article class="card">
-      <div class="icon">🏆</div>
-      <h2>Bajnokság</h2>
-      <p>Szerezz pontokat, versenyezz a többi nyomozóval,
-      és küzdj meg a heti első helyért.</p>
-    </article>
-  </section>
-
-  <section class="card" style="margin-top:20px">
-    <div class="eyebrow">NYOMOZÓI KÖZPONT</div>
-    <h2>Belépés hamarosan</h2>
-    <p>Az új rendszer előkészítése folyamatban van.
-    A regisztrációt az adatbázis biztonságos összekapcsolása
-    után aktiváljuk.</p>
-    <button onclick="showMessage()">Megnézem az állapotot</button>
-    <button class="secondary" onclick="showMessage()">Regisztráció – hamarosan</button>
-    <div id="message" role="status"></div>
-  </section>
+<div class="eyebrow">BIZALMAS NYOMOZÓI AKTÁK</div>
+<h1>MINDENKINEK<br>VAN <span>TITKA.</span></h1>
+<p>Vizsgáld meg a bizonyítékokat, fedezd fel az ellentmondásokat, és oldd meg az ügyeket. Versenyezz a többi nyomozóval a heti bajnokságban!</p>
+<div class="grid">
+<div class="card"><h3>🕵️ Nyomozás</h3><p>Vizsgáld meg a nyomokat, és derítsd ki az igazságot.</p></div>
+<div class="card"><h3>📁 Ügyek</h3><p>Minden rejtély új kihívást tartogat.</p></div>
+<div class="card"><h3>🏆 Bajnokság</h3><p>Szerezz pontokat, és küzdj az első helyért.</p></div>
+</div>
+<section class="panel">
+<h2>Nyomozói fiók</h2>
+<p>Regisztrálj, vagy lépj be a meglévő fiókoddal.</p>
+<label for="email">E-mail-cím</label>
+<input id="email" type="email" autocomplete="email" placeholder="pelda@email.com">
+<label for="password">Jelszó (legalább 6 karakter)</label>
+<input id="password" type="password" autocomplete="new-password" placeholder="Jelszó">
+<button id="register">Regisztráció</button>
+<button id="login" class="secondary">Bejelentkezés</button>
+<button id="logout" class="secondary" hidden>Kijelentkezés</button>
+<div id="status" role="status" aria-live="polite"></div>
+</section>
 </main>
-
 <footer>SHADOW CASE · MINDEN ÜGYNEK VAN MEGOLDÁSA</footer>
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-<script>
-function showMessage() {
-  const box = document.getElementById("message");
-  box.style.display = "block";
-  box.textContent =
-    "A kezdőoldal működik. A regisztráció és a nyomozások még nincsenek aktiválva.";
+const SUPABASE_URL = "sb_publishable_iEMl71FRGMQZ5dIgQI2z9w_PdQn8iHm";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_iEMl71FRGMQZ5dIgQI2z9w_PdQn8iHm";
+
+const statusBox = document.getElementById("status");
+const registerButton = document.getElementById("register");
+const loginButton = document.getElementById("login");
+const logoutButton = document.getElementById("logout");
+
+function message(text) {
+  statusBox.style.display = "block";
+  statusBox.textContent = text;
+}
+
+let supabase;
+try {
+  if (SUPABASE_URL.startsWith("https://") &&
+      !SUPABASE_URL.includes("IDE_ILLESZD") &&
+      !SUPABASE_PUBLISHABLE_KEY.includes("IDE_ILLESZD")) {
+    supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  }
+} catch (error) {
+  message("Nem sikerült elindítani a kapcsolatot. Ellenőrizd a beállításokat.");
+}
+
+async function authAction(action) {
+  if (!supabase) {
+    message("Még nincs beállítva a Supabase API URL és a Publishable key.");
+    return;
+  }
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  if (!email || !password) {
+    message("Add meg az e-mail-címedet és a jelszavadat.");
+    return;
+  }
+  if (password.length < 6) {
+    message("A jelszó legalább 6 karakter hosszú legyen.");
+    return;
+  }
+
+  registerButton.disabled = true;
+  loginButton.disabled = true;
+  try {
+    const result = action === "register"
+      ? await supabase.auth.signUp({ email, password })
+      : await supabase.auth.signInWithPassword({ email, password });
+
+    if (result.error) throw result.error;
+
+    if (action === "register" && !result.data.session) {
+      message("A regisztráció elindult. Nézd meg az e-mailjeidet, és erősítsd meg a címedet, ha megerősítő levelet kaptál.");
+    } else {
+      message("Sikeres " + (action === "register" ? "regisztráció" : "bejelentkezés") + "! Bejelentkezve: " + result.data.user.email);
+      logoutButton.hidden = false;
+    }
+  } catch (error) {
+    message("Nem sikerült: " + (error.message || "Ismeretlen hiba"));
+  } finally {
+    registerButton.disabled = false;
+    loginButton.disabled = false;
+  }
+}
+
+registerButton.addEventListener("click", () => authAction("register"));
+loginButton.addEventListener("click", () => authAction("login"));
+logoutButton.addEventListener("click", async () => {
+  if (!supabase) return;
+  const { error } = await supabase.auth.signOut();
+  if (error) message("Nem sikerült kijelentkezni.");
+  else {
+    message("Sikeresen kijelentkeztél.");
+    logoutButton.hidden = true;
+  }
+});
+
+if (supabase) {
+  const { data } = await supabase.auth.getSession();
+  if (data.session) {
+    message("Bejelentkezve: " + data.session.user.email);
+    logoutButton.hidden = false;
+  }
 }
 </script>
 </body>
 </html>
+```
