@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -8,53 +8,118 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#090b10;color:#f3f5fa;font-family:Arial,sans-serif}
-header{padding:22px 6%;border-bottom:1px solid #293244;font-weight:900;letter-spacing:3px}
-header span,h1 span{color:#d5ad63}
-main{max-width:900px;margin:auto;padding:45px 20px}
+header{padding:22px 6%;border-bottom:1px solid #293244;font-weight:900;letter-spacing:3px;display:flex;justify-content:space-between;align-items:center}
+.gold{color:#d5ad63}
+main{max-width:1000px;margin:auto;padding:38px 20px}
 .eyebrow{color:#d5ad63;letter-spacing:3px;font-size:11px}
-h1{font-size:clamp(38px,8vw,68px);line-height:1.05}
+h1{font-size:clamp(36px,7vw,60px);line-height:1.05}
 p{color:#aab3c2;line-height:1.7}
 .panel,.card{background:#121722;border:1px solid #293244;border-radius:8px;padding:22px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:24px 0}
 label{display:block;margin-top:14px;font-size:13px;color:#aab3c2}
 input{width:100%;margin-top:7px;padding:13px;background:#090b10;color:white;border:1px solid #394357;border-radius:5px}
-button{width:100%;padding:13px;margin-top:12px;background:#d5ad63;color:#111;border:0;border-radius:5px;font-weight:bold;cursor:pointer}
+button{padding:13px;margin-top:12px;background:#d5ad63;color:#111;border:0;border-radius:5px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.5;cursor:wait}
 button.secondary{background:transparent;color:white;border:1px solid #394357}
+.auth-buttons button{width:100%}
 #status{display:none;margin-top:15px;padding:12px;border:1px solid #394357;overflow-wrap:anywhere}
+#dashboard{display:none}
+.menu-card{min-height:170px}
+.menu-card button{width:100%}
+.small{font-size:13px;color:#8993a4}
 footer{text-align:center;color:#8993a4;padding:25px;border-top:1px solid #293244;font-size:12px}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
-<header>SHADOW <span>CASE</span></header>
+<header>
+  <div>SHADOW <span class="gold">CASE</span></div>
+  <div class="small">NYOMOZÓI HÁLÓZAT</div>
+</header>
+
 <main>
-<div class="eyebrow">BIZALMAS NYOMOZÓI AKTÁK</div>
-<h1>MINDENKINEK<br>VAN <span>TITKA.</span></h1>
-<p>Vizsgáld meg a bizonyítékokat, fedezd fel az ellentmondásokat, és oldd meg az ügyeket. Versenyezz a többi nyomozóval a heti bajnokságban!</p>
-<div class="grid">
-<div class="card"><h3>🕵️ Nyomozás</h3><p>Vizsgáld meg a nyomokat, és derítsd ki az igazságot.</p></div>
-<div class="card"><h3>📁 Ügyek</h3><p>Minden rejtély új kihívást tartogat.</p></div>
-<div class="card"><h3>🏆 Bajnokság</h3><p>Szerezz pontokat, és küzdj az első helyért.</p></div>
-</div>
-<section class="panel">
-<h2>Nyomozói fiók</h2>
-<p>Regisztrálj, vagy lépj be a meglévő fiókoddal.</p>
-<label for="email">E-mail-cím</label>
-<input id="email" type="email" autocomplete="email" placeholder="pelda@email.com">
-<label for="password">Jelszó (legalább 6 karakter)</label>
-<input id="password" type="password" autocomplete="new-password" placeholder="Jelszó">
-<button id="register">Regisztráció</button>
-<button id="login" class="secondary">Bejelentkezés</button>
-<button id="logout" class="secondary" hidden>Kijelentkezés</button>
-<div id="status" role="status" aria-live="polite"></div>
+<section id="landing">
+  <div class="eyebrow">BIZALMAS NYOMOZÓI AKTÁK</div>
+  <h1>MINDENKINEK<br>VAN <span class="gold">TITKA.</span></h1>
+  <p>Vizsgáld meg a bizonyítékokat, fedezd fel az ellentmondásokat, és oldd meg az ügyeket. Versenyezz a többi nyomozóval a heti bajnokságban!</p>
+
+  <div class="grid">
+    <div class="card"><h3>🕵️ Nyomozás</h3><p>Vizsgáld meg a nyomokat, és derítsd ki az igazságot.</p></div>
+    <div class="card"><h3>📁 Ügyek</h3><p>Minden rejtély új kihívást tartogat.</p></div>
+    <div class="card"><h3>🏆 Bajnokság</h3><p>Szerezz pontokat, és küzdj az első helyért.</p></div>
+  </div>
+
+  <section class="panel">
+    <h2>Nyomozói fiók</h2>
+    <p>Regisztrálj, vagy lépj be a meglévő fiókoddal.</p>
+    <label for="email">E-mail-cím</label>
+    <input id="email" type="email" autocomplete="email" placeholder="pelda@email.com">
+    <label for="password">Jelszó (legalább 6 karakter)</label>
+    <input id="password" type="password" autocomplete="current-password" placeholder="Jelszó">
+    <div class="auth-buttons">
+      <button id="register">Regisztráció</button>
+      <button id="login" class="secondary">Bejelentkezés</button>
+    </div>
+  </section>
 </section>
+
+<section id="dashboard">
+  <div class="eyebrow">HOZZÁFÉRÉS ENGEDÉLYEZVE</div>
+  <h1>ÜDVÖZLÜNK A<br><span class="gold">NYOMOZÓI KÖZPONTBAN.</span></h1>
+  <p>Bejelentkezve: <strong id="playerEmail"></strong></p>
+
+  <div class="grid">
+    <div class="card menu-card">
+      <h3>🕵️ Nyomozás</h3>
+      <p>Indíts új ügyet, és vizsgáld meg a bizonyítékokat.</p>
+      <button data-section="investigation">Akták megtekintése</button>
+    </div>
+    <div class="card menu-card">
+      <h3>📁 Aktáim</h3>
+      <p>Később itt találod a megkezdett és befejezett ügyeidet.</p>
+      <button data-section="mycases">Aktáim megnyitása</button>
+    </div>
+    <div class="card menu-card">
+      <h3>🏆 Bajnokság</h3>
+      <p>A heti verseny és a játékosok ranglistája.</p>
+      <button data-section="championship">Bajnokság megnyitása</button>
+    </div>
+    <div class="card menu-card">
+      <h3>👤 Profilom</h3>
+      <p>A nyomozói fiókod és a játékosadataid.</p>
+      <button data-section="profile">Profil megnyitása</button>
+    </div>
+    <div class="card menu-card">
+      <h3>🪙 Információs piac</h3>
+      <p>Később itt kereskedhetsz megszerzett információkkal.</p>
+      <button data-section="market">Piac megnyitása</button>
+    </div>
+  </div>
+
+  <section id="detail" class="panel" hidden>
+    <h2 id="detailTitle">Nyomozói központ</h2>
+    <p id="detailText"></p>
+    <button id="backButton" class="secondary">Vissza a főmenübe</button>
+  </section>
+
+  <button id="logout" class="secondary">Kijelentkezés</button>
+</section>
+
+<div id="status" role="status" aria-live="polite"></div>
 </main>
+
 <footer>SHADOW CASE · MINDEN ÜGYNEK VAN MEGOLDÁSA</footer>
+
 <script type="module">
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const SUPABASE_URL = "https://cwmcfizvgqpuhdyueriz.supabase.co/";
+const SUPABASE_URL = "https://cwmcfizvgqpuhdyueriz.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_iEMl71FRGMQZ5dIgQI2z9w_PdQn8iHm";
 
+const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+const landing = document.getElementById("landing");
+const dashboard = document.getElementById("dashboard");
 const statusBox = document.getElementById("status");
 const registerButton = document.getElementById("register");
 const loginButton = document.getElementById("login");
@@ -65,24 +130,22 @@ function message(text) {
   statusBox.textContent = text;
 }
 
-let supabase;
-try {
-  if (SUPABASE_URL.startsWith("https://") &&
-      !SUPABASE_URL.includes("IDE_ILLESZD") &&
-      !SUPABASE_PUBLISHABLE_KEY.includes("IDE_ILLESZD")) {
-    supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-  }
-} catch (error) {
-  message("Nem sikerült elindítani a kapcsolatot. Ellenőrizd a beállításokat.");
+function showDashboard(user) {
+  landing.style.display = "none";
+  dashboard.style.display = "block";
+  document.getElementById("playerEmail").textContent = user.email || "Nyomozó";
+  statusBox.style.display = "none";
+}
+
+function showLanding() {
+  dashboard.style.display = "none";
+  landing.style.display = "block";
 }
 
 async function authAction(action) {
-  if (!supabase) {
-    message("Még nincs beállítva a Supabase API URL és a Publishable key.");
-    return;
-  }
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
+
   if (!email || !password) {
     message("Add meg az e-mail-címedet és a jelszavadat.");
     return;
@@ -94,6 +157,7 @@ async function authAction(action) {
 
   registerButton.disabled = true;
   loginButton.disabled = true;
+
   try {
     const result = action === "register"
       ? await supabase.auth.signUp({ email, password })
@@ -102,10 +166,12 @@ async function authAction(action) {
     if (result.error) throw result.error;
 
     if (action === "register" && !result.data.session) {
-      message("A regisztráció elindult. Nézd meg az e-mailjeidet, és erősítsd meg a címedet, ha megerősítő levelet kaptál.");
+      message("A regisztráció elindult. Ellenőrizd az e-mailjeidet, és erősítsd meg a címedet, ha levelet kaptál.");
+    } else if (result.data.session) {
+      showDashboard(result.data.user);
+      message("Sikeres bejelentkezés!");
     } else {
-      message("Sikeres " + (action === "register" ? "regisztráció" : "bejelentkezés") + "! Bejelentkezve: " + result.data.user.email);
-      logoutButton.hidden = false;
+      message("A művelet sikerült. Ha megerősítő levelet kaptál, ellenőrizd az e-mailjeidet.");
     }
   } catch (error) {
     message("Nem sikerült: " + (error.message || "Ismeretlen hiba"));
@@ -117,24 +183,48 @@ async function authAction(action) {
 
 registerButton.addEventListener("click", () => authAction("register"));
 loginButton.addEventListener("click", () => authAction("login"));
+
 logoutButton.addEventListener("click", async () => {
-  if (!supabase) return;
   const { error } = await supabase.auth.signOut();
-  if (error) message("Nem sikerült kijelentkezni.");
-  else {
+  if (error) {
+    message("Nem sikerült kijelentkezni: " + error.message);
+  } else {
+    showLanding();
     message("Sikeresen kijelentkeztél.");
-    logoutButton.hidden = true;
   }
 });
 
-if (supabase) {
-  const { data } = await supabase.auth.getSession();
-  if (data.session) {
-    message("Bejelentkezve: " + data.session.user.email);
-    logoutButton.hidden = false;
-  }
+const sections = {
+  investigation: ["Nyomozás", "Az akták és a rejtélyek feltöltése következik. A nyomozási rendszer még fejlesztés alatt áll."],
+  mycases: ["Aktáim", "A megkezdett és megoldott ügyeid itt jelennek majd meg."],
+  championship: ["Heti bajnokság", "A pontozás és a ranglista bekötése következik."],
+  profile: ["Nyomozói profil", "Bejelentkezett fiók: " + "A profil és a pontok megjelenítését még be kell kötni."],
+  market: ["Információs piac", "A nyomok és részleges információk kereskedése később készül el."]
+};
+
+document.querySelectorAll("[data-section]").forEach(button => {
+  button.addEventListener("click", () => {
+    const section = sections[button.dataset.section];
+    document.getElementById("detailTitle").textContent = section[0];
+    document.getElementById("detailText").textContent = section[1];
+    document.getElementById("detail").hidden = false;
+    document.getElementById("detail").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+document.getElementById("backButton").addEventListener("click", () => {
+  document.getElementById("detail").hidden = true;
+});
+
+const { data: sessionData } = await supabase.auth.getSession();
+if (sessionData.session) {
+  showDashboard(sessionData.session.user);
 }
+
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === "SIGNED_IN" && session) showDashboard(session.user);
+  if (event === "SIGNED_OUT") showLanding();
+});
 </script>
 </body>
 </html>
-```
