@@ -4,7 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b10">
 <title>SHADOW CASE – Nyomozói központ</title>
+
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#090b10;color:#f3f5fa;font-family:Arial,sans-serif}
@@ -23,7 +25,6 @@ button:disabled{opacity:.5;cursor:wait}
 button.secondary{background:transparent;color:white;border:1px solid #394357}
 .auth-buttons button{width:100%}
 #status{display:none;margin-top:15px;padding:12px;border:1px solid #394357;overflow-wrap:anywhere}
-#dashboard{display:block}
 .menu-card{min-height:170px}
 .menu-card button{width:100%}
 .small{font-size:13px;color:#8993a4}
@@ -44,6 +45,7 @@ footer{text-align:center;color:#8993a4;padding:25px;border-top:1px solid #293244
 }
 </style>
 </head>
+
 <body>
 <header>
   <div>SHADOW <span class="gold">CASE</span></div>
@@ -64,24 +66,19 @@ footer{text-align:center;color:#8993a4;padding:25px;border-top:1px solid #293244
 
   <section class="panel">
     <h2>Nyomozói fiók</h2>
-    <p>Új fiók létrehozásához adj meg felhasználónevet is. Meglévő fiókkal csak e-mail-címmel és jelszóval lépj be.</p>
+    <p>Regisztrációhoz adj meg felhasználónevet is. Meglévő fiókkal e-mail-címmel és jelszóval lépj be.</p>
 
-    <label for="username">Felhasználónév (3–20 karakter, regisztrációhoz)</label>
-    <input
-      id="username"
-      type="text"
-      minlength="3"
-      maxlength="20"
-      pattern="[A-Za-z0-9_]+"
-      autocomplete="username"
-      placeholder="Például: Nyomozo_01"
-    >
+    <label for="username">Felhasználónév (3–20 karakter)</label>
+    <input id="username" type="text" minlength="3" maxlength="20"
+      pattern="[A-Za-z0-9_]+" autocomplete="username"
+      placeholder="Például: Nyomozo_01">
 
     <label for="email">E-mail-cím</label>
     <input id="email" type="email" autocomplete="email" placeholder="pelda@email.com">
 
     <label for="password">Jelszó (legalább 6 karakter)</label>
-    <input id="password" type="password" autocomplete="current-password" placeholder="Jelszó">
+    <input id="password" type="password" minlength="6"
+      autocomplete="current-password" placeholder="Jelszó">
 
     <div class="auth-buttons">
       <button id="register">Regisztráció</button>
@@ -95,6 +92,7 @@ footer{text-align:center;color:#8993a4;padding:25px;border-top:1px solid #293244
   <h1>ÜDVÖZLÜNK A<br><span class="gold">NYOMOZÓI KÖZPONTBAN.</span></h1>
   <p>Bejelentkezve: <strong id="playerEmail"></strong></p>
   <p>Felhasználónév: <strong id="playerUsername"></strong></p>
+  <p>Elérhető pontjaid: <strong id="playerPoints">Betöltés...</strong></p>
 
   <div class="grid">
     <div class="card menu-card">
@@ -156,6 +154,7 @@ footer{text-align:center;color:#8993a4;padding:25px;border-top:1px solid #293244
 
 <div id="status" role="status" aria-live="polite"></div>
 </main>
+
 <footer>SHADOW CASE · MINDEN ÜGYNEK VAN MEGOLDÁSA</footer>
 
 <script type="module">
@@ -173,6 +172,7 @@ const registerButton = $("register");
 const loginButton = $("login");
 
 const panels = ["caseList", "caseView", "leaderboard", "detail"];
+let currentUser = null;
 
 function message(text) {
   statusBox.style.display = "block";
@@ -184,16 +184,15 @@ function hidePanels() {
 }
 
 function showDashboard(user) {
+  currentUser = user;
   landing.hidden = true;
   dashboard.hidden = false;
   $("playerEmail").textContent = user.email || "Nyomozó";
   $("playerUsername").textContent =
-    user.user_metadata?.username || "A profil betöltése...";
-
+    user.user_metadata?.username || "Profil betöltése...";
+  $("playerPoints").textContent = "Betöltés...";
   statusBox.style.display = "none";
   hidePanels();
-
-  // A profilban tárolt név megjelenítése, ha van.
   loadCurrentProfile(user.id);
 }
 
@@ -207,9 +206,34 @@ async function loadCurrentProfile(userId) {
   if (!error && data?.username) {
     $("playerUsername").textContent = data.username;
   }
+
+  await loadPlayerPoints(userId);
+}
+
+async function loadPlayerPoints(userId) {
+  const { data, error } = await supabase
+    .from("wallets")
+    .select("*")
+    .eq("player_id", userId)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Pontok betöltése:", error);
+    $("playerPoints").textContent = "A pontok nem tölthetők be";
+    return;
+  }
+
+  if (data) {
+    const balance = data.balance ?? data.credits ?? data.points;
+    $("playerPoints").textContent =
+      balance == null ? "A pontadat elérhető a profilban" : Number(balance).toLocaleString("hu-HU");
+  } else {
+    $("playerPoints").textContent = "A pontadat nem található";
+  }
 }
 
 function showLanding() {
+  currentUser = null;
   dashboard.hidden = true;
   landing.hidden = false;
   hidePanels();
@@ -230,15 +254,10 @@ async function authAction(action) {
     return;
   }
 
-  if (action === "register") {
-    if (!/^[A-Za-z0-9_]{3,20}$/.test(username)) {
-      message(
-        "A felhasználónév 3–20 karakteres lehet. " +
-        "Csak angol betűt, számot és aláhúzásjelet (_) használhatsz."
-      );
-      $("username").focus();
-      return;
-    }
+  if (action === "register" && !/^[A-Za-z0-9_]{3,20}$/.test(username)) {
+    message("A felhasználónév 3–20 karakteres lehet. Csak angol betűt, számot és aláhúzásjelet használj.");
+    $("username").focus();
+    return;
   }
 
   registerButton.disabled = true;
@@ -248,16 +267,12 @@ async function authAction(action) {
     let result;
 
     if (action === "register") {
-      // Előzetes ellenőrzés, hogy ne válasszon foglalt nevet.
       const { data: profiles, error: profileError } = await supabase
         .from("profiles")
         .select("username");
 
       if (profileError) {
-        throw new Error(
-          "Nem sikerült ellenőrizni a felhasználónevet. " +
-          "Próbáld újra. " + profileError.message
-        );
+        throw new Error("Nem sikerült ellenőrizni a felhasználónevet: " + profileError.message);
       }
 
       const usernameTaken = (profiles || []).some(profile =>
@@ -266,55 +281,33 @@ async function authAction(action) {
 
       if (usernameTaken) {
         message("Ez a felhasználónév már foglalt. Válassz másikat!");
-        $("username").focus();
         return;
       }
 
       result = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: { username }
-        }
+        options: { data: { username } }
       });
     } else {
-      // Bejelentkezésnél a felhasználónév nem kötelező.
-      result = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
+      result = await supabase.auth.signInWithPassword({ email, password });
     }
 
     if (result.error) {
-      const errorText = result.error.message || "Ismeretlen hiba";
-
-      if (
-        action === "register" &&
-        /duplicate key|profiles_username_lower_uidx|already exists/i.test(errorText)
-      ) {
+      if (action === "register" &&
+          /duplicate key|profiles_username_lower_uidx|already exists/i.test(result.error.message)) {
         throw new Error("Ez a felhasználónév már foglalt. Válassz másikat!");
       }
-
       throw result.error;
     }
 
     if (action === "register" && !result.data.session) {
-      message(
-        "A regisztráció elindult. Ellenőrizd az e-mailjeidet, " +
-        "és erősítsd meg a címedet, ha levelet kaptál."
-      );
+      message("A regisztráció elindult. Ellenőrizd az e-mailjeidet, és erősítsd meg a címedet, ha levelet kaptál.");
     } else if (result.data.session) {
       showDashboard(result.data.user);
-      message(
-        action === "register"
-          ? "Sikeres regisztráció és bejelentkezés!"
-          : "Sikeres bejelentkezés!"
-      );
+      message(action === "register" ? "Sikeres regisztráció és bejelentkezés!" : "Sikeres bejelentkezés!");
     } else {
-      message(
-        "A művelet sikerült. Ellenőrizd az e-mailjeidet, " +
-        "ha megerősítő levelet kaptál."
-      );
+      message("A művelet sikerült. Ellenőrizd az e-mailjeidet, ha megerősítő levelet kaptál.");
     }
   } catch (error) {
     console.error("Fiókművelet hiba:", error);
@@ -330,7 +323,6 @@ loginButton.addEventListener("click", () => authAction("login"));
 
 $("logout").addEventListener("click", async () => {
   const { error } = await supabase.auth.signOut();
-
   if (error) {
     message("Nem sikerült kijelentkezni: " + error.message);
   } else {
@@ -340,18 +332,9 @@ $("logout").addEventListener("click", async () => {
 });
 
 const sections = {
-  mycases: [
-    "Aktáim",
-    "A megkezdett és megoldott ügyeid megjelenítése a következő fejlesztési lépés."
-  ],
-  profile: [
-    "Nyomozói profil",
-    "A profil és a pénztárca részletes megjelenítése később készül el."
-  ],
-  market: [
-    "Információs piac",
-    "A nyomok és részleges információk kereskedése még fejlesztés alatt áll."
-  ]
+  mycases: ["Aktáim", "A megkezdett és megoldott ügyeid megjelenítése a következő fejlesztési lépés."],
+  profile: ["Nyomozói profil", "A profil és a pénztárca részletes megjelenítése később készül el."],
+  market: ["Információs piac", "A nyomok és részleges információk kereskedése még fejlesztés alatt áll."]
 };
 
 async function loadCases() {
@@ -370,14 +353,12 @@ async function loadCases() {
 
   if (error) {
     console.error(error);
-    container.textContent =
-      "Nem sikerült betölteni az aktákat. Ellenőrizd az adatbázis jogosultságait.";
+    container.textContent = "Nem sikerült betölteni az aktákat. Ellenőrizd az adatbázis jogosultságait.";
     return;
   }
 
-  if (!data || data.length === 0) {
-    container.textContent =
-      "Jelenleg nincs publikált ügy. Hamarosan új akták érkeznek.";
+  if (!data?.length) {
+    container.textContent = "Jelenleg nincs publikált ügy. Hamarosan új akták érkeznek.";
     return;
   }
 
@@ -389,13 +370,11 @@ async function loadCases() {
     title.textContent = "📁 " + item.title;
 
     const description = document.createElement("p");
-    description.textContent =
-      item.description || "Ehhez az ügyhöz még nincs leírás.";
+    description.textContent = item.description || "Ehhez az ügyhöz még nincs leírás.";
 
     const meta = document.createElement("p");
     meta.className = "small";
-    meta.textContent =
-      "Nehézség: " + (item.difficulty || "ismeretlen") +
+    meta.textContent = "Nehézség: " + (item.difficulty || "ismeretlen") +
       " · Ügyért járó pont: " + (item.points_reward ?? 0);
 
     const open = document.createElement("button");
@@ -412,8 +391,7 @@ async function openCase(caseData) {
   $("caseView").hidden = false;
   $("caseTitle").textContent = caseData.title;
   $("caseDescription").textContent = caseData.description || "";
-  $("caseMeta").textContent =
-    "Nehézség: " + (caseData.difficulty || "ismeretlen") +
+  $("caseMeta").textContent = "Nehézség: " + (caseData.difficulty || "ismeretlen") +
     " · Pontjutalom: " + (caseData.points_reward ?? 0);
 
   $("evidenceContent").textContent = "A bizonyítékok betöltése...";
@@ -421,14 +399,11 @@ async function openCase(caseData) {
   $("caseMessage").hidden = true;
 
   const [evidenceResult, questionResult] = await Promise.all([
-    supabase
-      .from("case_evidence")
+    supabase.from("case_evidence")
       .select("id,title,content,evidence_order")
       .eq("case_id", caseData.id)
       .order("evidence_order", { ascending: true }),
-
-    supabase
-      .from("case_questions")
+    supabase.from("case_questions")
       .select("id,question_text,question_order,points")
       .eq("case_id", caseData.id)
       .order("question_order", { ascending: true })
@@ -446,13 +421,10 @@ async function openCase(caseData) {
     evidenceResult.data.forEach(evidence => {
       const block = document.createElement("div");
       block.className = "evidence";
-
       const title = document.createElement("strong");
       title.textContent = evidence.title;
-
       const text = document.createElement("p");
       text.textContent = evidence.content;
-
       block.append(title, text);
       evidenceContainer.appendChild(block);
     });
@@ -495,7 +467,6 @@ async function openCase(caseData) {
 
     button.addEventListener("click", async () => {
       const answer = input.value.trim();
-
       if (!answer) {
         result.textContent = "Előbb írd be a válaszodat.";
         return;
@@ -513,21 +484,18 @@ async function openCase(caseData) {
 
         if (error) throw error;
 
-        result.textContent =
-          data?.message || "A válasz ellenőrzése befejeződött.";
+        result.textContent = data?.message || "A válasz ellenőrzése befejeződött.";
 
         if (data?.success) {
-          result.textContent +=
-            " +" + (Number(data.points_awarded) || 0) + " pont.";
+          result.textContent += " +" + (Number(data.points_awarded) || 0) + " pont.";
+          if (currentUser) await loadPlayerPoints(currentUser.id);
         } else {
           input.disabled = false;
           button.disabled = false;
         }
       } catch (error) {
         console.error(error);
-        result.textContent =
-          "Nem sikerült beküldeni a választ: " +
-          (error.message || "Ismeretlen hiba");
+        result.textContent = "Nem sikerült beküldeni a választ: " + (error.message || "Ismeretlen hiba");
         input.disabled = false;
         button.disabled = false;
       }
@@ -561,9 +529,10 @@ async function loadLeaderboard() {
 
     seasonName.textContent = season.name;
 
+    // A biztonságos szerveroldali függvényt használjuk,
+    // nem a közvetlenül védett case_completions táblát.
     const { data: players, error: playersError } = await supabase
-      .from("weekly_leaderboard")
-      .select("username,total_points,cases_completed")
+      .rpc("get_weekly_leaderboard")
       .eq("season_id", season.id)
       .order("total_points", { ascending: false })
       .limit(10);
@@ -571,8 +540,7 @@ async function loadLeaderboard() {
     if (playersError) throw playersError;
 
     if (!players?.length) {
-      content.textContent =
-        "Még nincs megjeleníthető eredmény. Lehet, hogy még senki sem szerzett bajnoki pontot.";
+      content.textContent = "Még nincs megjeleníthető bajnoki eredmény.";
       return;
     }
 
@@ -591,8 +559,7 @@ async function loadLeaderboard() {
   } catch (error) {
     console.error("Ranglista betöltési hiba:", error);
     seasonName.textContent = "Nem sikerült betölteni a ranglistát.";
-    content.textContent =
-      "Ellenőrizni kell az adatbázis jogosultságait és a kapcsolatot.";
+    content.textContent = "Hiba: " + (error.message || "Ellenőrizd az adatbázis-függvényt és a jogosultságokat.");
   }
 }
 
@@ -615,7 +582,6 @@ document.querySelectorAll("[data-section]").forEach(button => {
     }
 
     const section = sections[key];
-
     if (section) {
       $("detailTitle").textContent = section[0];
       $("detailText").textContent = section[1];
@@ -625,22 +591,12 @@ document.querySelectorAll("[data-section]").forEach(button => {
   });
 });
 
-$("casesBack").addEventListener("click", () => {
-  hidePanels();
-});
-
+$("casesBack").addEventListener("click", hidePanels);
 $("caseListBack").addEventListener("click", loadCases);
+$("leaderboardBack").addEventListener("click", () => $("leaderboard").hidden = true);
+$("backButton").addEventListener("click", () => $("detail").hidden = true);
 
-$("leaderboardBack").addEventListener("click", () => {
-  $("leaderboard").hidden = true;
-});
-
-$("backButton").addEventListener("click", () => {
-  $("detail").hidden = true;
-});
-
-const { data: sessionData, error: sessionError } =
-  await supabase.auth.getSession();
+const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
 
 if (sessionError) {
   message("Nem sikerült ellenőrizni a bejelentkezést.");
@@ -649,13 +605,8 @@ if (sessionError) {
 }
 
 supabase.auth.onAuthStateChange((event, session) => {
-  if (event === "SIGNED_IN" && session) {
-    showDashboard(session.user);
-  }
-
-  if (event === "SIGNED_OUT") {
-    showLanding();
-  }
+  if (event === "SIGNED_IN" && session) showDashboard(session.user);
+  if (event === "SIGNED_OUT") showLanding();
 });
 </script>
 </body>
