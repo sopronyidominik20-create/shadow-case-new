@@ -20,6 +20,29 @@ label{display:block;margin-top:14px;color:var(--muted);font-size:13px}input,sele
 #status{display:none;margin-top:16px;padding:13px;border:1px solid var(--line);border-radius:6px;overflow-wrap:anywhere}[hidden]{display:none!important}ol{padding-left:25px}li{padding:11px 6px;border-bottom:1px solid var(--line);line-height:1.6}.empty{padding:18px;border:1px dashed #465064;border-radius:7px;color:var(--muted)}footer{text-align:center;color:#929bad;padding:25px;border-top:1px solid var(--line);font-size:12px}
 .character-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px;margin:18px 0}.character-card{padding:0;overflow:hidden}.character-card img{width:100%;height:240px;object-fit:cover;display:block;background:#090b10}.character-card .character-info{padding:15px}.avatar-preview{width:88px;height:88px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);background:#090b10}.wallet-line{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.notice{padding:12px;border:1px solid #6b542d;background:#241d12;border-radius:6px;color:#e7cf9e;margin:12px 0}
 @media(max-width:560px){header{padding:14px 5%;font-size:12px;letter-spacing:1px}main{padding:24px 13px}.panel,.card{padding:17px}.auth-buttons{grid-template-columns:1fr}.topline button{margin-top:0}.character-card img{height:210px}}
+
+/* SHADOW CASE – interaktív nyomozás */
+.investigation-hero{padding:24px;border:1px solid #394357;border-radius:10px;background:linear-gradient(120deg,#101622ee,#080a10dd),url('https://images.unsplash.com/photo-1453873531674-2151bcd01707?auto=format&fit=crop&w=1400&q=80') center/cover;margin:18px 0}
+.case-level{display:inline-block;border:1px solid #d5ad63;color:#d5ad63;border-radius:30px;padding:5px 10px;font-size:12px}
+.investigation-progress{height:7px;background:#252d3b;border-radius:9px;overflow:hidden;margin:12px 0}
+.investigation-progress span{display:block;height:100%;width:0;background:#d5ad63;transition:width .3s}
+.investigation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:13px;margin:18px 0}
+.suspect-card{padding:0;overflow:hidden;border:1px solid #394357;border-radius:8px;background:#10151f;cursor:pointer;transition:transform .2s,border-color .2s;text-align:left;color:var(--text);margin-top:0}
+.suspect-card:hover{transform:translateY(-3px);border-color:#d5ad63}
+.suspect-card.selected{border:2px solid #d5ad63;box-shadow:0 0 0 2px #d5ad6322}
+.suspect-card img{width:100%;height:220px;object-fit:cover;display:block;background:#090b10}
+.suspect-card .suspect-info{padding:12px}
+.suspect-card h4{margin:0 0 6px}
+.suspect-card p{font-size:12px;margin:5px 0}
+.clue-card{background:#090b10;border-left:3px solid #d5ad63;padding:14px;margin:10px 0;border-radius:4px}
+.interactive-question{border-top:1px solid #30394a;padding:18px 0}
+.interactive-question textarea{min-height:75px}
+.interactive-feedback{padding:13px;margin-top:12px;border-radius:6px;background:#101722;border:1px solid #394357}
+.interactive-feedback.good{border-color:#438e69;color:#a8e7c3}
+.interactive-feedback.bad{border-color:#a84b53;color:#ffc0c5}
+.investigation-video{width:100%;max-height:440px;background:#000;border-radius:8px;margin:12px 0}
+@media(max-width:520px){.suspect-card img{height:185px}.investigation-hero{padding:17px}}
+
 </style>
 </head>
 <body>
@@ -59,6 +82,7 @@ label{display:block;margin-top:14px;color:var(--muted);font-size:13px}input,sele
     <article class="card menu-card"><span class="pill">05</span><h3>🪙 Wallet / pénztárca</h3><p>Kredit-egyenleged és tranzakcióid.</p><button data-route="wallet">Pénztárca megnyitása</button></article>
     <article class="card menu-card"><span class="pill">06</span><h3>🕶️ Karakterek</h3><p>Ismerd meg az ügyek szereplőit.</p><button data-route="characters">Karakterek megtekintése</button></article>
     <article class="card menu-card"><span class="pill">07</span><h3>🪙 Információs piac</h3><p>Részleges nyomok adásvétele játékosok között.</p><button data-route="market">Piac megnyitása</button></article>
+    <article class="card menu-card"><span class="pill">08 / INTERAKTÍV ÜGYEK</span><h3>🎬 Filmszerű nyomozás</h3><p>Gyanúsítottak, vallomások, bizonyítékok és videós nyomok.</p><button data-route="interactive">Interaktív ügyek megnyitása</button></article>
   </div>
   <button id="logout" class="secondary">Kijelentkezés</button>
 </section>
@@ -92,6 +116,69 @@ label{display:block;margin-top:14px;color:var(--muted);font-size:13px}input,sele
   <h3>Aktív ajánlatok</h3><div id="marketContent"></div>
   <div class="notice">Adatvédelmi megjegyzés: a meglévő adatbázisban az ajánlat leírása az aktív hirdetés rekordjában van. A valóban titkos, csak vásárlás után látható tartalomhoz külön, szerveroldali védelem szükséges; a jelenlegi séma önmagában nem garantálja ezt.</div>
 </section>
+
+<section id="screen-interactive" class="screen" hidden>
+  <div class="topline">
+    <div><div class="eyebrow">KÜLÖNLEGES NYOMOZÁSI EGYSÉG</div><h2>Interaktív ügyek</h2></div>
+    <button class="secondary" data-route="home">← Vissza</button>
+  </div>
+  <div class="investigation-hero">
+    <span class="case-level">1. ÜGY · KÖZEPES NEHÉZSÉG</span>
+    <h2>Az utolsó vonat</h2>
+    <p>23:17-kor egy vasútállomás melletti irodában holtan találták a biztonsági vezetőt. Az ajtó belülről zárva volt. Négy ember állítja, hogy a gyilkosság idején máshol tartózkodott – de az egyik vallomás gyanús.</p>
+    <div class="investigation-progress"><span id="investigationProgress"></span></div>
+    <p class="small" id="investigationStepLabel">0 / 5 nyomozási lépés teljesítve</p>
+  </div>
+  <div class="panel">
+    <h3>Bizonyítékok</h3>
+    <div class="clue-card"><strong>📹 Biztonsági napló</strong><p>23:04-kor a hátsó folyosó kamerája 47 másodpercre leállt. A főbejárati kamera végig működött.</p></div>
+    <div class="clue-card"><strong>🕰️ Megállt óra</strong><p>Az irodában lévő falióra 23:11-et mutatott. A szakértő szerint az óra ütés következtében állt meg, nem az elem merült le.</p></div>
+    <div class="clue-card"><strong>🧤 Nedves kesztyű</strong><p>Egy nedves kesztyűt találtak a hátsó kijárat közelében. Aznap este 22:50 és 23:20 között esett az eső.</p></div>
+    <div class="clue-card"><strong>🚆 Vonatmenetrend</strong><p>Az utolsó vonat 23:10-kor indult. A peronra a főbejáraton vagy a hátsó folyosón keresztül lehetett eljutni.</p></div>
+  </div>
+  <h3>Gyanúsítottak – válassz portré alapján</h3>
+  <p class="small">A szereplők fiktívek. A portrók illusztrációs célú, internetes képek.</p>
+  <div class="investigation-grid" id="suspectGrid">
+    <button type="button" class="suspect-card" data-suspect="anna"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=85" alt="Anna Varga portré"><div class="suspect-info"><h4>Anna Varga</h4><p>Állomásvezető</p><p>„23:00-kor már hazafelé indultam.”</p></div></button>
+    <button type="button" class="suspect-card" data-suspect="balint"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=85" alt="Bálint Fekete portré"><div class="suspect-info"><h4>Bálint Fekete</h4><p>Biztonsági őr</p><p>„Végig a főbejáratnál álltam.”</p></div></button>
+    <button type="button" class="suspect-card" data-suspect="csilla"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=600&q=85" alt="Csilla Tóth portré"><div class="suspect-info"><h4>Csilla Tóth</h4><p>Jegypénztáros</p><p>„23:10-kor láttam indulni az utolsó vonatot.”</p></div></button>
+    <button type="button" class="suspect-card" data-suspect="david"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=85" alt="Dávid Molnár portré"><div class="suspect-info"><h4>Dávid Molnár</h4><p>Karbantartó</p><p>„A kamerához aznap hozzá sem nyúltam.”</p></div></button>
+  </div>
+  <div class="panel">
+    <h3>Nyomozási napló</h3>
+    <div class="interactive-question">
+      <span class="pill">1 / 5 · GYANÚSÍTOTT</span><h3>Kit tartasz jelenleg a leggyanúsabbnak?</h3>
+      <p>Válassz egy arcot a fenti portrék közül, majd rögzítsd a döntésedet.</p>
+      <button id="submitSuspect">Gyanúsított rögzítése</button><div id="suspectFeedback" class="interactive-feedback" hidden></div>
+    </div>
+    <div class="interactive-question">
+      <span class="pill">2 / 5 · SZABAD VÁLASZ</span><h3>Mikor állt le a hátsó folyosó kamerája?</h3>
+      <label for="cameraAnswer">Írd be az időpontot</label><input id="cameraAnswer" placeholder="Például: 23:04">
+      <button id="submitCamera">Válasz ellenőrzése</button><div id="cameraFeedback" class="interactive-feedback" hidden></div>
+    </div>
+    <div class="interactive-question">
+      <span class="pill">3 / 5 · LOGIKAI FELADAT</span><h3>Ki mondott ellent a bizonyítékoknak?</h3>
+      <p>Válaszd ki azt, akinek a vallomása gyanús a rendelkezésre álló információ alapján.</p>
+      <select id="lieAnswer"><option value="">Válassz gyanúsítottat…</option><option value="anna">Anna Varga</option><option value="balint">Bálint Fekete</option><option value="csilla">Csilla Tóth</option><option value="david">Dávid Molnár</option></select>
+      <button id="submitLie">Vallomás ellenőrzése</button><div id="lieFeedback" class="interactive-feedback" hidden></div>
+    </div>
+    <div class="interactive-question">
+      <span class="pill">4 / 5 · VIDEÓS NYOM</span><h3>Figyeld meg a helyszínt</h3>
+      <p>A következő rövid videó csak hangulat- és megfigyelési próba, nem a fiktív ügy bizonyítéka. A történethez illő videót később külön kell elkészíteni vagy feltölteni.</p>
+      <video class="investigation-video" controls preload="metadata"><source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">A böngésződ nem támogatja a videólejátszást.</video>
+      <label for="videoAnswer">Melyik bizonyítékot kellene először újra megvizsgálni?</label>
+      <select id="videoAnswer"><option value="">Válassz…</option><option value="camera">A kameranaplót</option><option value="weather">Az időjárás-jelentést</option><option value="menu">Az étlapot</option></select>
+      <button id="submitVideo">Megfigyelés rögzítése</button><div id="videoFeedback" class="interactive-feedback" hidden></div>
+    </div>
+    <div class="interactive-question">
+      <span class="pill">5 / 5 · VÉGSŐ MEGFEJTÉS</span><h3>Mi a végső következtetésed?</h3>
+      <p>Írd le, kit tartasz gyanúsnak, hogyan juthatott be, és melyik bizonyíték támasztja alá az elméletedet.</p>
+      <label for="finalAnswer">Saját megfejtés</label><textarea id="finalAnswer" placeholder="Szerintem a tettes… azért, mert…"></textarea>
+      <button id="submitFinal">Megfejtés lezárása</button><div id="finalFeedback" class="interactive-feedback" hidden></div>
+    </div>
+  </div>
+</section>
+
 <div id="status" role="status" aria-live="polite"></div>
 </main><footer>SHADOW CASE · MINDEN ÜGYNEK VAN MEGOLDÁSA</footer>
 
@@ -102,8 +189,8 @@ const SUPABASE_PUBLISHABLE_KEY="sb_publishable_iEMl71FRGMQZ5dIgQI2z9w_PdQn8iHm";
 const supabase=createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
 const $=id=>document.getElementById(id);
 let currentUser=null,currentCase=null,pointsBalance=0,caseCache=[],profileCache=null;
-const routes=["home","cases","case","mycases","championship","profile","wallet","characters","market"];
-const routeScreens={cases:"screen-cases",case:"screen-case",mycases:"screen-mycases",championship:"screen-championship",profile:"screen-profile",wallet:"screen-wallet",characters:"screen-characters",market:"screen-market"};
+const routes=["home","cases","case","mycases","championship","profile","wallet","characters","market","interactive"];
+const routeScreens={cases:"screen-cases",case:"screen-case",mycases:"screen-mycases",championship:"screen-championship",profile:"screen-profile",wallet:"screen-wallet",characters:"screen-characters",market:"screen-market",interactive:"screen-interactive"};
 function message(t){$("status").style.display="block";$("status").textContent=t}
 function clearMessage(){$("status").style.display="none";$("status").textContent=""}
 function safeText(v){return v===null||v===undefined?"":String(v)}
@@ -377,6 +464,54 @@ supabase.auth.onAuthStateChange((event,session)=>{
   if(event==="SIGNED_IN"&&session){currentUser=session.user;$("landing").hidden=true;$("dashboard").hidden=false;loadProfile(currentUser).then(()=>showRoute("home",{noHistory:true}));}
   if(event==="SIGNED_OUT"){currentUser=null;$("landing").hidden=false;$("dashboard").hidden=true;Object.values(routeScreens).forEach(id=>$(id).hidden=true);}
 });
+
+// ---- Interaktív ügy: Az utolsó vonat (bemutató prototípus) ----
+const interactiveState={done:new Set(),suspect:""};
+function updateInvestigationProgress(){
+  const count=interactiveState.done.size;
+  const bar=$("investigationProgress"),label=$("investigationStepLabel");
+  if(bar)bar.style.width=(count/5*100)+"%";
+  if(label)label.textContent=count+" / 5 nyomozási lépés teljesítve";
+}
+function investigationFeedback(id,text,kind){
+  const el=$(id);if(!el)return;
+  el.hidden=false;el.className="interactive-feedback"+(kind?" "+kind:"");el.textContent=text;
+}
+function completeInvestigationStep(step){interactiveState.done.add(step);updateInvestigationProgress();}
+document.querySelectorAll("[data-suspect]").forEach(card=>card.addEventListener("click",()=>{
+  document.querySelectorAll("[data-suspect]").forEach(c=>c.classList.remove("selected"));
+  card.classList.add("selected");interactiveState.suspect=card.dataset.suspect;
+}));
+$("submitSuspect")?.addEventListener("click",()=>{
+  if(!interactiveState.suspect){investigationFeedback("suspectFeedback","Előbb válassz egy gyanúsítottat.","bad");return;}
+  const names={anna:"Anna Varga",balint:"Bálint Fekete",csilla:"Csilla Tóth",david:"Dávid Molnár"};
+  investigationFeedback("suspectFeedback","Rögzítetted a gyanúdat: "+names[interactiveState.suspect]+". A nyomozás végén még változtathatsz a következtetéseden.","");
+  completeInvestigationStep("suspect");
+});
+$("submitCamera")?.addEventListener("click",()=>{
+  const value=$("cameraAnswer").value.trim().replace(/\s/g,"");
+  if(value==="23:04"||value==="2304"){investigationFeedback("cameraFeedback","Helyes: a hátsó folyosó kamerája 23:04-kor állt le.","good");completeInvestigationStep("camera");}
+  else investigationFeedback("cameraFeedback","Ez nem egyezik a bizonyítékkal. Vizsgáld meg újra a biztonsági naplót.","bad");
+});
+$("submitLie")?.addEventListener("click",()=>{
+  const value=$("lieAnswer").value;
+  if(value==="david"){investigationFeedback("lieFeedback","Jó észrevétel: Dávid vallomása gyanús, de ez önmagában még nem bizonyítja, hogy ő a tettes.","good");completeInvestigationStep("lie");}
+  else if(!value)investigationFeedback("lieFeedback","Válassz ki egy gyanúsítottat.","bad");
+  else investigationFeedback("lieFeedback","A jelenlegi nyomok alapján ez a vallomás még nem cáfolható egyértelműen. Nézd meg újra a bizonyítékokat.","bad");
+});
+$("submitVideo")?.addEventListener("click",()=>{
+  const value=$("videoAnswer").value;
+  if(value==="camera"){investigationFeedback("videoFeedback","Helyes nyomozói döntés: a kameranapló közvetlenül kapcsolódik a 47 másodperces kieséshez.","good");completeInvestigationStep("video");}
+  else investigationFeedback("videoFeedback","Válassz olyan bizonyítékot, amely közvetlenül kapcsolódik a 47 másodperces kamerakieséshez.","bad");
+});
+$("submitFinal")?.addEventListener("click",()=>{
+  const value=$("finalAnswer").value.trim();
+  if(value.length<30){investigationFeedback("finalFeedback","Írj részletesebb magyarázatot: nevezd meg a gyanúsítottat, a lehetséges módszert és az elméletedet alátámasztó bizonyítékot.","bad");return;}
+  investigationFeedback("finalFeedback","A megfejtésedet rögzítetted ebben a böngészőnézetben. Ez a prototípus még nem menti az adatbázisba, nem ellenőrzi szerveroldalon a tettest, és nem ad ranglistapontot.","good");
+  completeInvestigationStep("final");
+});
+updateInvestigationProgress();
+
 </script>
 </body>
 </html>
