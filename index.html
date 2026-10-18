@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#080a10">
 <title>SHADOW CASE — Nyomozói központ</title>
 <style>
-:root{--bg:#080a10;--panel:#121722;--line:#2b3445;--text:#f3f5fa;--muted:#aab3c2;--gold:#d5ad63;--red:#b83b45}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;background-image:linear-gradient(90deg,rgba(8,10,16,.96),rgba(8,10,16,.78)),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=85');background-size:cover;background-attachment:fixed;background-position:center}
+:root{--bg:#080a10;--panel:#121722;--line:#2b3445;--text:#f3f5fa;--muted:#aab3c2;--gold:#d5ad63;--red:#b83b45;--green:#6ec49a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;background-image:linear-gradient(90deg,rgba(8,10,16,.96),rgba(8,10,16,.82)),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=85');background-size:cover;background-attachment:fixed;background-position:center}
 header{position:sticky;top:0;z-index:5;background:rgba(8,10,16,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:16px max(5%,calc((100% - 1180px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px}
 .brand{font-weight:900;letter-spacing:3px}.gold{color:var(--gold)}.small{font-size:12px;color:#929bad}
 main{max-width:1180px;margin:auto;padding:32px 20px 55px}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:3px;font-weight:bold}h1{font-size:clamp(34px,6vw,64px);line-height:1.02;margin:14px 0}h2{margin-top:0}p{color:var(--muted);line-height:1.65}
@@ -18,7 +18,8 @@ label{display:block;margin-top:14px;color:var(--muted);font-size:13px}input,sele
 .topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}.screen{animation:fade .22s ease}@keyframes fade{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
 .evidence{margin:12px 0;padding:16px;border-left:3px solid var(--gold);background:#090b10;border-radius:4px}.case-card{margin:12px 0}.question{padding:18px 0;border-top:1px solid var(--line)}.result{margin-top:10px;padding:12px;border:1px solid var(--line);border-radius:5px;overflow-wrap:anywhere}.pill{display:inline-block;border:1px solid #4b5362;border-radius:30px;padding:5px 9px;font-size:12px;color:var(--gold)}.statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:20px 0}.stat{background:#090b10;border:1px solid var(--line);padding:15px;border-radius:7px}.stat strong{display:block;color:var(--gold);font-size:22px;margin-top:6px}
 #status{display:none;margin-top:16px;padding:13px;border:1px solid var(--line);border-radius:6px;overflow-wrap:anywhere}[hidden]{display:none!important}ol{padding-left:25px}li{padding:11px 6px;border-bottom:1px solid var(--line);line-height:1.6}.empty{padding:18px;border:1px dashed #465064;border-radius:7px;color:var(--muted)}footer{text-align:center;color:#929bad;padding:25px;border-top:1px solid var(--line);font-size:12px}
-@media(max-width:560px){header{padding:14px 5%;font-size:12px;letter-spacing:1px}main{padding:24px 13px}.panel,.card{padding:17px}.auth-buttons{grid-template-columns:1fr}.topline button{margin-top:0}}
+.character-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px;margin:18px 0}.character-card{padding:0;overflow:hidden}.character-card img{width:100%;height:240px;object-fit:cover;display:block;background:#090b10}.character-card .character-info{padding:15px}.avatar-preview{width:88px;height:88px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);background:#090b10}.wallet-line{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.notice{padding:12px;border:1px solid #6b542d;background:#241d12;border-radius:6px;color:#e7cf9e;margin:12px 0}
+@media(max-width:560px){header{padding:14px 5%;font-size:12px;letter-spacing:1px}main{padding:24px 13px}.panel,.card{padding:17px}.auth-buttons{grid-template-columns:1fr}.topline button{margin-top:0}.character-card img{height:210px}}
 </style>
 </head>
 <body>
@@ -34,7 +35,7 @@ label{display:block;margin-top:14px;color:var(--muted);font-size:13px}input,sele
     <article class="card"><span class="pill">03 / INFORMÁCIÓ</span><h3>Minden nyom számít</h3><p>Az információs piacon részleges nyomokat cserélhetsz.</p></article>
   </div>
   <section class="panel">
-    <h2>Nyomozói fiók</h2><p>Új fiókhoz adj meg felhasználónevet is. Meglévő fiókkal e-mail-címmel és jelszóval lépj be.</p>
+    <h2>Nyomozói fiók</h2><p>Új fiókhoz adj meg egyedi felhasználónevet. Meglévő fiókkal e-mail-címmel és jelszóval lépj be.</p>
     <label for="username">Felhasználónév (3–20 karakter)</label><input id="username" minlength="3" maxlength="20" autocomplete="username" placeholder="Például: Nyomozo_01">
     <label for="email">E-mail-cím</label><input id="email" type="email" autocomplete="email" placeholder="pelda@email.com">
     <label for="password">Jelszó (legalább 6 karakter)</label><input id="password" type="password" minlength="6" autocomplete="current-password" placeholder="Jelszó">
@@ -45,68 +46,337 @@ label{display:block;margin-top:14px;color:var(--muted);font-size:13px}input,sele
 <section id="dashboard" hidden class="screen">
   <div class="eyebrow">HOZZÁFÉRÉS ENGEDÉLYEZVE</div><h1>NYOMOZÓI<br><span class="gold">KÖZPONT.</span></h1>
   <p>Üdv, <strong id="playerUsername">Nyomozó</strong> · <span id="playerEmail"></span></p>
-  <div class="statrow"><div class="stat">Elérhető pontjaid<strong id="playerPoints">Betöltés…</strong></div><div class="stat">Heti helyezés<strong id="playerRank">—</strong></div><div class="stat">Megoldott ügyeid<strong id="playerSolved">—</strong></div></div>
+  <div class="statrow">
+    <div class="stat">Elérhető kredited<strong id="playerPoints">Betöltés…</strong></div>
+    <div class="stat">Heti helyezés<strong id="playerRank">—</strong></div>
+    <div class="stat">Helyes válaszaid<strong id="playerSolved">—</strong></div>
+  </div>
   <div class="grid">
     <article class="card menu-card"><span class="pill">01</span><h3>🕵️ Nyomozás</h3><p>Nyisd meg az aktákat, vizsgáld meg a nyomokat.</p><button data-route="cases">Akták megtekintése</button></article>
-    <article class="card menu-card"><span class="pill">02</span><h3>📁 Aktáim</h3><p>Korábbi próbálkozásaid és megoldott ügyeid.</p><button data-route="mycases">Aktáim megnyitása</button></article>
+    <article class="card menu-card"><span class="pill">02</span><h3>📁 Aktáim</h3><p>Korábbi próbálkozásaid és helyes válaszaid.</p><button data-route="mycases">Aktáim megnyitása</button></article>
     <article class="card menu-card"><span class="pill">03</span><h3>🏆 Bajnokság</h3><p>Heti pontverseny és nyomozói ranglista.</p><button data-route="championship">Ranglista megnyitása</button></article>
-    <article class="card menu-card"><span class="pill">04</span><h3>👤 Profilom</h3><p>Fiókadatok, pontok és nyomozói statisztikák.</p><button data-route="profile">Profil megnyitása</button></article>
-    <article class="card menu-card"><span class="pill">05</span><h3>🪙 Információs piac</h3><p>Részleges nyomok adásvétele játékosok között.</p><button data-route="market">Piac megnyitása</button></article>
+    <article class="card menu-card"><span class="pill">04</span><h3>👤 Profilom és beállítások</h3><p>Felhasználónév, profilkép és fiókadatok.</p><button data-route="profile">Profil megnyitása</button></article>
+    <article class="card menu-card"><span class="pill">05</span><h3>🪙 Wallet / pénztárca</h3><p>Kredit-egyenleged és tranzakcióid.</p><button data-route="wallet">Pénztárca megnyitása</button></article>
+    <article class="card menu-card"><span class="pill">06</span><h3>🕶️ Karakterek</h3><p>Ismerd meg az ügyek szereplőit.</p><button data-route="characters">Karakterek megtekintése</button></article>
+    <article class="card menu-card"><span class="pill">07</span><h3>🪙 Információs piac</h3><p>Részleges nyomok adásvétele játékosok között.</p><button data-route="market">Piac megnyitása</button></article>
   </div>
   <button id="logout" class="secondary">Kijelentkezés</button>
 </section>
 
 <section id="screen-cases" class="screen" hidden><div class="topline"><div><div class="eyebrow">AKTÁK / NYOMOZÁS</div><h2>Elérhető ügyek</h2></div><button class="secondary" data-route="home">← Vissza</button></div><div id="casesContent"></div></section>
 <section id="screen-case" class="screen" hidden><div class="topline"><div><div class="eyebrow">BIZALMAS DOSSZIÉ</div><h2 id="caseTitle">Ügy</h2></div><button class="secondary" data-route="cases">← Vissza az aktákhoz</button></div><p id="caseDescription"></p><p class="small" id="caseMeta"></p><h3>Bizonyítékok</h3><div id="evidenceContent"></div><h3>Kérdések</h3><div id="questionsContent"></div><div id="caseMessage" class="result" hidden></div></section>
-<section id="screen-mycases" class="screen" hidden><div class="topline"><div><div class="eyebrow">SZEMÉLYES ARCHÍVUM</div><h2>Aktáim</h2></div><button class="secondary" data-route="home">← Vissza</button></div><p>Itt jelennek meg a saját ügypróbálkozásaid és a megoldott esetek, ha az adatbázis jogosultságai engedik.</p><div id="mycasesContent"></div></section>
+<section id="screen-mycases" class="screen" hidden><div class="topline"><div><div class="eyebrow">SZEMÉLYES ARCHÍVUM</div><h2>Aktáim</h2></div><button class="secondary" data-route="home">← Vissza</button></div><div id="mycasesContent"></div></section>
 <section id="screen-championship" class="screen" hidden><div class="topline"><div><div class="eyebrow">HETI VERSENY</div><h2>Bajnokság és ranglista</h2></div><button class="secondary" data-route="home">← Vissza</button></div><p id="seasonName">Bajnokság betöltése…</p><div id="leaderboardContent"></div></section>
-<section id="screen-profile" class="screen" hidden><div class="topline"><div><div class="eyebrow">NYOMOZÓI DOSSZIÉ</div><h2>Profilom</h2></div><button class="secondary" data-route="home">← Vissza</button></div><div class="panel"><p>E-mail: <strong id="profileEmail"></strong></p><p>Felhasználónév: <strong id="profileUsername"></strong></p><p>Játékosazonosító: <span class="small" id="profileId"></span></p><p>Elérhető pontok: <strong id="profilePoints" class="gold"></strong></p></div></section>
-<section id="screen-market" class="screen" hidden><div class="topline"><div><div class="eyebrow">NYOMKERESKEDELEM</div><h2>Információs piac</h2></div><button class="secondary" data-route="home">← Vissza</button></div><p>Csak részleges információt kínálj eladásra. A teljes megoldást ne add át; a piactéren a vevő csak a megnevezett nyomot kapja meg.</p><div class="panel"><h3>Új információ meghirdetése</h3><label for="listingTitle">Nyom címe</label><input id="listingTitle" maxlength="80" placeholder="Például: Tanúvallomás – 2. rész"><label for="listingDescription">Részleges információ (ne a teljes megoldás!)</label><textarea id="listingDescription" maxlength="500" placeholder="Írd le a megvásárolható nyomot..."></textarea><label for="listingPrice">Ár pontban</label><input id="listingPrice" type="number" min="1" max="1000" value="10"><button id="createListing">Nyom meghirdetése</button><p class="small">A biztonságos, minden játékos által közösen használt piachoz a lenti SQL-adatbázis-kiegészítést is telepíteni kell.</p></div><h3>Elérhető ajánlatok</h3><div id="marketContent"></div></section>
+<section id="screen-profile" class="screen" hidden>
+  <div class="topline"><div><div class="eyebrow">NYOMOZÓI DOSSZIÉ</div><h2>Profilom és beállítások</h2></div><button class="secondary" data-route="home">← Vissza</button></div>
+  <div class="panel">
+    <div class="wallet-line"><img id="avatarPreview" class="avatar-preview" alt="Profilkép" hidden><div><p>E-mail: <strong id="profileEmail"></strong></p><p>Játékosazonosító: <span class="small" id="profileId"></span></p></div></div>
+    <label for="profileUsernameInput">Felhasználónév (3–20 karakter)</label><input id="profileUsernameInput" minlength="3" maxlength="20">
+    <label for="profileAvatarInput">Profilkép URL (opcionális)</label><input id="profileAvatarInput" type="url" placeholder="https://.../profilkep.jpg">
+    <button id="saveProfile">Profilbeállítások mentése</button>
+    <p class="small">A profilképhez nyilvánosan elérhető HTTPS-képlinket adj meg.</p>
+  </div>
+</section>
+<section id="screen-wallet" class="screen" hidden><div class="topline"><div><div class="eyebrow">KREDITKÖZPONT</div><h2>Wallet / pénztárca</h2></div><button class="secondary" data-route="home">← Vissza</button></div><div class="panel"><p>Elérhető egyenleged</p><h1><span id="walletBalance" class="gold">—</span> <span style="font-size:22px">kredit</span></h1><button id="refreshWallet" class="secondary">Egyenleg frissítése</button></div><h3>Tranzakciós előzmények</h3><div id="transactionsContent"></div><p class="small">A kreditek játékbeli pontok. Ez a felület nem kezel valódi pénzt.</p></section>
+<section id="screen-characters" class="screen" hidden><div class="topline"><div><div class="eyebrow">SZEREPLŐK / DOSSIÉK</div><h2>Karakterek</h2></div><button class="secondary" data-route="home">← Vissza</button></div><div id="charactersContent"></div></section>
+<section id="screen-market" class="screen" hidden>
+  <div class="topline"><div><div class="eyebrow">NYOMKERESKEDELEM</div><h2>Információs piac</h2></div><button class="secondary" data-route="home">← Vissza</button></div>
+  <p>Válassz egy ügyet, és kínálj fel egy részleges nyomot más nyomozóknak.</p>
+  <div class="panel"><h3>Új információ meghirdetése</h3>
+    <label for="listingCase">Kapcsolódó ügy</label><select id="listingCase"><option value="">Ügyek betöltése…</option></select>
+    <label for="listingTitle">Nyom címe (5–60 karakter)</label><input id="listingTitle" minlength="5" maxlength="60" placeholder="Például: A tanú vallomásának ellentmondása">
+    <label for="listingDescription">Részleges információ (40–400 karakter)</label><textarea id="listingDescription" minlength="40" maxlength="400" placeholder="Írd le a megvásárolható nyomot."></textarea>
+    <label for="listingPrice">Ár (1–50 kredit)</label><input id="listingPrice" type="number" min="1" max="50" value="10">
+    <button id="createListing">Nyom meghirdetése</button>
+  </div>
+  <h3>Aktív ajánlatok</h3><div id="marketContent"></div>
+  <div class="notice">Adatvédelmi megjegyzés: a meglévő adatbázisban az ajánlat leírása az aktív hirdetés rekordjában van. A valóban titkos, csak vásárlás után látható tartalomhoz külön, szerveroldali védelem szükséges; a jelenlegi séma önmagában nem garantálja ezt.</div>
+</section>
 <div id="status" role="status" aria-live="polite"></div>
 </main><footer>SHADOW CASE · MINDEN ÜGYNEK VAN MEGOLDÁSA</footer>
+
 <script type="module">
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const SUPABASE_URL="https://cwmcfizvgqpuhdyueriz.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_iEMl71FRGMQZ5dIgQI2z9w_PdQn8iHm";
 const supabase=createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
 const $=id=>document.getElementById(id);
-let currentUser=null,currentCase=null,pointsBalance=0,caseCache=[];
-const routes=["home","cases","case","mycases","championship","profile","market"];
-const routeScreens={cases:"screen-cases",case:"screen-case",mycases:"screen-mycases",championship:"screen-championship",profile:"screen-profile",market:"screen-market"};
+let currentUser=null,currentCase=null,pointsBalance=0,caseCache=[],profileCache=null;
+const routes=["home","cases","case","mycases","championship","profile","wallet","characters","market"];
+const routeScreens={cases:"screen-cases",case:"screen-case",mycases:"screen-mycases",championship:"screen-championship",profile:"screen-profile",wallet:"screen-wallet",characters:"screen-characters",market:"screen-market"};
 function message(t){$("status").style.display="block";$("status").textContent=t}
 function clearMessage(){$("status").style.display="none";$("status").textContent=""}
-function showRoute(route,opts={}){if(!routes.includes(route))route="home";if(route!=="home"&&!currentUser){route="home";message("A folytatáshoz előbb jelentkezz be.");}
-$("landing").hidden=!!currentUser;$("dashboard").hidden=!currentUser||route!=="home";
-Object.values(routeScreens).forEach(id=>$(id).hidden=true);
-if(route!=="home"&&routeScreens[route])$(routeScreens[route]).hidden=false;
-if(!opts.noHistory)history.pushState({route,caseId:route==="case"?currentCase?.id:null},"","#"+route+(route==="case"&&currentCase?"-"+currentCase.id:""));
-clearMessage();
-if(route==="cases")loadCases();if(route==="case"&&currentCase)renderCase(currentCase);if(route==="mycases")loadMyCases();if(route==="championship")loadLeaderboard();if(route==="profile")renderProfile();if(route==="market")loadMarket();
-window.scrollTo({top:0,behavior:"smooth"});}
+function safeText(v){return v===null||v===undefined?"":String(v)}
+function showRoute(route,opts={}) {
+  if(!routes.includes(route))route="home";
+  if(route!=="home"&&!currentUser){route="home";message("A folytatáshoz előbb jelentkezz be.");}
+  $("landing").hidden=!!currentUser;
+  $("dashboard").hidden=!currentUser||route!=="home";
+  Object.values(routeScreens).forEach(id=>$(id).hidden=true);
+  if(route!=="home"&&routeScreens[route])$(routeScreens[route]).hidden=false;
+  if(!opts.noHistory)history.pushState({route,caseId:route==="case"?currentCase?.id:null},"","#"+route+(route==="case"&&currentCase?"-"+currentCase.id:""));
+  if(opts.keepMessage!==true)clearMessage();
+  if(route==="cases")loadCases();
+  if(route==="case"&&currentCase)renderCase(currentCase);
+  if(route==="mycases")loadMyCases();
+  if(route==="championship")loadLeaderboard();
+  if(route==="profile")renderProfile();
+  if(route==="wallet")loadWallet();
+  if(route==="characters")loadCharacters();
+  if(route==="market")loadMarket();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 window.addEventListener("popstate",e=>{const state=e.state||{};if(state.route==="case"&&state.caseId){const found=caseCache.find(c=>String(c.id)===String(state.caseId));if(found)currentCase=found;}showRoute(state.route||"home",{noHistory:true});});
 document.querySelectorAll("[data-route]").forEach(b=>b.addEventListener("click",()=>showRoute(b.dataset.route)));
-async function loadProfile(user){$("playerEmail").textContent=user.email||"";$("profileEmail").textContent=user.email||"";$("profileId").textContent=user.id;
-let {data,error}=await supabase.from("profiles").select("*").eq("id",user.id).maybeSingle();
-if(!error&&data){$("playerUsername").textContent=data.username||user.user_metadata?.username||"Nyomozó";$("profileUsername").textContent=$("playerUsername").textContent;}else{$("playerUsername").textContent=user.user_metadata?.username||"Nyomozó";$("profileUsername").textContent=$("playerUsername").textContent;}
-await loadPoints(user.id);}
-async function loadPoints(uid){let {data,error}=await supabase.from("wallets").select("*").eq("player_id",uid).maybeSingle();if(error){console.warn(error);$("playerPoints").textContent="—";pointsBalance=0;}else{const bal=data?.balance??data?.credits??data?.points??0;pointsBalance=Number(bal)||0;$("playerPoints").textContent=pointsBalance.toLocaleString("hu-HU");}
-$("profilePoints").textContent=pointsBalance.toLocaleString("hu-HU");}
-async function authAction(kind){const username=$("username").value.trim(),email=$("email").value.trim(),password=$("password").value;if(!email||!password){message("Add meg az e-mail-címedet és a jelszavadat.");return;}if(password.length<6){message("A jelszó legalább 6 karakter hosszú legyen.");return;}if(kind==="register"&&!/^[A-Za-z0-9_]{3,20}$/.test(username)){message("A felhasználónév 3–20 karakteres lehet; angol betűt, számot és aláhúzásjelet használj.");return;}
-$("register").disabled=$("login").disabled=true;try{let result;if(kind==="register"){const {data:existing,error:checkError}=await supabase.from("profiles").select("username").ilike("username",username);if(checkError)throw new Error("Felhasználónév-ellenőrzési hiba: "+checkError.message);if(existing?.length){message("Ez a felhasználónév már foglalt.");return;}result=await supabase.auth.signUp({email,password,options:{data:{username}}});}else result=await supabase.auth.signInWithPassword({email,password});if(result.error)throw result.error;if(result.data.session){currentUser=result.data.user;$("landing").hidden=true;$("dashboard").hidden=false;await loadProfile(currentUser);showRoute("home");message(kind==="register"?"Sikeres regisztráció!":"Sikeres bejelentkezés!");}else message("Regisztráció elindult. Ellenőrizd az e-mailjeidet, és erősítsd meg a címedet, ha levelet kaptál.");}catch(e){message("Nem sikerült: "+(e.message||"Ismeretlen hiba"));}finally{$("register").disabled=$("login").disabled=false;}}
-$("register").addEventListener("click",()=>authAction("register"));$("login").addEventListener("click",()=>authAction("login"));
+
+async function loadProfile(user){
+  $("playerEmail").textContent=user.email||"";
+  $("profileEmail").textContent=user.email||"";
+  $("profileId").textContent=user.id;
+  const {data,error}=await supabase.from("profiles").select("*").eq("id",user.id).maybeSingle();
+  if(!error&&data)profileCache=data;else profileCache=null;
+  const username=profileCache?.username||user.user_metadata?.username||"Nyomozó";
+  $("playerUsername").textContent=username;
+  $("profileUsernameInput").value=username;
+  $("profileAvatarInput").value=profileCache?.avatar_url||"";
+  updateAvatarPreview(profileCache?.avatar_url||"");
+  await loadPoints(user.id);
+}
+function updateAvatarPreview(url){
+  const img=$("avatarPreview");
+  if(url&&/^https:\/\/\S+/i.test(url)){img.src=url;img.hidden=false;img.onerror=()=>{img.hidden=true;};}
+  else{img.removeAttribute("src");img.hidden=true;}
+}
+$("profileAvatarInput").addEventListener("input",e=>updateAvatarPreview(e.target.value.trim()));
+async function loadPoints(uid){
+  const {data,error}=await supabase.from("wallets").select("balance").eq("player_id",uid).maybeSingle();
+  if(error){console.warn(error);$("playerPoints").textContent="—";pointsBalance=0;}
+  else{pointsBalance=Number(data?.balance??0)||0;$("playerPoints").textContent=pointsBalance.toLocaleString("hu-HU");}
+  $("profilePoints")?.textContent;
+  if($("walletBalance"))$("walletBalance").textContent=pointsBalance.toLocaleString("hu-HU");
+}
+async function authAction(kind){
+  const username=$("username").value.trim(),email=$("email").value.trim(),password=$("password").value;
+  if(!email||!password){message("Add meg az e-mail-címedet és a jelszavadat.");return;}
+  if(password.length<6){message("A jelszó legalább 6 karakter hosszú legyen.");return;}
+  if(kind==="register"&&!/^[A-Za-z0-9_]{3,20}$/.test(username)){message("A felhasználónév 3–20 karakteres lehet; angol betűt, számot és aláhúzásjelet használj.");return;}
+  $("register").disabled=$("login").disabled=true;
+  try{
+    let result;
+    if(kind==="register"){
+      const {data:existing,error:checkError}=await supabase.from("profiles").select("username").ilike("username",username);
+      if(checkError)throw new Error("Felhasználónév-ellenőrzési hiba: "+checkError.message);
+      if(existing?.length){message("Ez a felhasználónév már foglalt.");return;}
+      result=await supabase.auth.signUp({email,password,options:{data:{username}}});
+    }else result=await supabase.auth.signInWithPassword({email,password});
+    if(result.error)throw result.error;
+    if(result.data.session){
+      currentUser=result.data.user;$("landing").hidden=true;$("dashboard").hidden=false;
+      await loadProfile(currentUser);showRoute("home",{keepMessage:true});
+      message(kind==="register"?"Sikeres regisztráció!":"Sikeres bejelentkezés!");
+    }else message("Regisztráció elindult. Ellenőrizd az e-mailjeidet, és erősítsd meg a címedet, ha levelet kaptál.");
+  }catch(e){message("Nem sikerült: "+(e.message||"Ismeretlen hiba"));}
+  finally{$("register").disabled=$("login").disabled=false;}
+}
+$("register").addEventListener("click",()=>authAction("register"));
+$("login").addEventListener("click",()=>authAction("login"));
 $("logout").addEventListener("click",async()=>{const {error}=await supabase.auth.signOut();if(error)message(error.message);else{currentUser=null;showRoute("home");$("landing").hidden=false;$("dashboard").hidden=true;message("Sikeresen kijelentkeztél.");}});
-async function loadCases(){const c=$("casesContent");c.replaceChildren();c.textContent="Akták betöltése…";const {data,error}=await supabase.from("cases").select("id,title,description,difficulty,points_reward,credits_reward").eq("is_published",true).order("published_at",{ascending:false});c.replaceChildren();if(error){c.textContent="Nem sikerült betölteni az aktákat: "+error.message;return;}caseCache=data||[];if(!caseCache.length){c.innerHTML='<div class="empty">Jelenleg nincs publikált ügy.</div>';return;}caseCache.forEach(item=>{const card=document.createElement("article");card.className="card case-card";const h=document.createElement("h3");h.textContent="📁 "+item.title;const p=document.createElement("p");p.textContent=item.description||"Ehhez az ügyhöz még nincs leírás.";const meta=document.createElement("p");meta.className="small";meta.textContent="Nehézség: "+(item.difficulty||"ismeretlen")+" · Pontjutalom: "+(item.points_reward??0);const b=document.createElement("button");b.textContent="Ügy megnyitása";b.onclick=()=>{currentCase=item;showRoute("case");};card.append(h,p,meta,b);c.append(card);});}
-async function renderCase(item){$("caseTitle").textContent=item.title;$("caseDescription").textContent=item.description||"";$("caseMeta").textContent="Nehézség: "+(item.difficulty||"ismeretlen")+" · Pontjutalom: "+(item.points_reward??0);$("evidenceContent").textContent="Bizonyítékok betöltése…";$("questionsContent").textContent="Kérdések betöltése…";
-const [er,qr]=await Promise.all([supabase.from("case_evidence").select("id,title,content,evidence_order").eq("case_id",item.id).order("evidence_order",{ascending:true}),supabase.from("case_questions").select("id,question_text,question_order,points").eq("case_id",item.id).order("question_order",{ascending:true})]);
-const ec=$("evidenceContent");ec.replaceChildren();if(er.error)ec.textContent="A bizonyítékok betöltése sikertelen: "+er.error.message;else if(!er.data?.length)ec.innerHTML='<div class="empty">Ehhez az ügyhöz még nincs bizonyíték.</div>';else er.data.forEach(e=>{const b=document.createElement("div");b.className="evidence";const h=document.createElement("strong");h.textContent=e.title;const p=document.createElement("p");p.textContent=e.content;b.append(h,p);ec.append(b);});
-const qc=$("questionsContent");qc.replaceChildren();if(qr.error){qc.textContent="A kérdések betöltése sikertelen: "+qr.error.message;return;}if(!qr.data?.length){qc.innerHTML='<div class="empty">Ehhez az ügyhöz még nincs kérdés.</div>';return;}
-qr.data.forEach(q=>{const block=document.createElement("div");block.className="question";const label=document.createElement("label");label.textContent=q.question_text;const input=document.createElement("input");input.placeholder="Írd ide a megfejtésed";input.autocomplete="off";const button=document.createElement("button");button.textContent="Válasz beküldése";const result=document.createElement("p");result.className="small";button.onclick=async()=>{if(!input.value.trim()){result.textContent="Előbb írd be a válaszodat.";return;}button.disabled=true;result.textContent="Ellenőrzés…";try{const {data,error}=await supabase.rpc("submit_case_answer",{p_question_id:q.id,p_answer:input.value.trim()});if(error)throw error;result.textContent=data?.message||"Válasz ellenőrizve.";if(data?.success){result.textContent+=" +"+(Number(data.points_awarded)||0)+" pont.";input.disabled=true;await loadPoints(currentUser.id);}else button.disabled=false;}catch(e){result.textContent="Beküldési hiba: "+e.message;button.disabled=false;}};block.append(label,input,button,result);qc.append(block);});}
-async function loadLeaderboard(){const n=$("seasonName"),c=$("leaderboardContent");n.textContent="Bajnokság betöltése…";c.replaceChildren();try{const {data:season,error:se}=await supabase.from("seasons").select("id,name").eq("status","active").maybeSingle();if(se)throw se;if(!season){n.textContent="Jelenleg nincs aktív bajnokság.";return;}n.textContent=season.name;const {data:players,error}=await supabase.rpc("get_weekly_leaderboard");if(error)throw error;const filtered=(players||[]).filter(p=>!p.season_id||String(p.season_id)===String(season.id)).sort((a,b)=>(Number(b.total_points)||0)-(Number(a.total_points)||0)).slice(0,20);if(!filtered.length){c.innerHTML='<div class="empty">Még nincs megjeleníthető bajnoki eredmény.</div>';return;}const list=document.createElement("ol");filtered.forEach((p,i)=>{const li=document.createElement("li");li.textContent=(i+1)+". "+(p.username||"Névtelen nyomozó")+" — "+(Number(p.total_points)||0)+" pont · "+(Number(p.cases_completed)||0)+" megoldott ügy";list.append(li);if(currentUser&&(p.player_id===currentUser.id||p.id===currentUser.id))$("playerRank").textContent="#"+(i+1);});c.append(list);}catch(e){n.textContent="A ranglista nem tölthető be.";c.textContent="Adatbázisüzenet: "+e.message;}}
-async function loadMyCases(){const c=$("mycasesContent");c.replaceChildren();c.textContent="Saját eredmények betöltése…";const {data,error}=await supabase.from("case_attempts").select("*").eq("player_id",currentUser.id).order("created_at",{ascending:false}).limit(100);c.replaceChildren();if(error){c.textContent="Az Aktáim listája nem érhető el: "+error.message+" (lehet, hogy a táblában más időbélyegmező szerepel).";return;}if(!data?.length){c.innerHTML='<div class="empty">Még nincs rögzített válaszpróbálkozásod. Nyiss meg egy aktát, és kezdd el a nyomozást!</div>';return;}const list=document.createElement("div");data.forEach((a,i)=>{const card=document.createElement("article");card.className="card case-card";const h=document.createElement("h3");h.textContent="Próbálkozás "+(i+1);const p=document.createElement("p");p.textContent="Kérdésazonosító: "+(a.question_id||"—");const s=document.createElement("span");s.className="pill";s.textContent=a.is_correct?"HELYES VÁLASZ":"PRÓBÁLKOZÁS";card.append(h,p,s);list.append(card);});c.append(list);$("playerSolved").textContent=String(data.filter(a=>a.is_correct).length);}
-function renderProfile(){$("profileEmail").textContent=currentUser.email||"";$("profileUsername").textContent=$("playerUsername").textContent;$("profileId").textContent=currentUser.id;$("profilePoints").textContent=pointsBalance.toLocaleString("hu-HU");}
-async function loadMarket(){const c=$("marketContent");c.replaceChildren();const {data,error}=await supabase.from("market_listings").select("id,title,description,price,player_id,created_at").eq("status","open").order("created_at",{ascending:false}).limit(50);if(error){c.innerHTML='<div class="empty">A közös piactér adatbázisrésze még nincs telepítve. A következő SQL-kiegészítés létrehozza a szükséges táblát és biztonságos vásárlási műveletet.</div>';return;}if(!data?.length){c.innerHTML='<div class="empty">Még nincs elérhető ajánlat.</div>';return;}data.forEach(row=>{const card=document.createElement("article");card.className="card case-card";const h=document.createElement("h3");h.textContent=row.title;const p=document.createElement("p");p.textContent=row.description;const meta=document.createElement("p");meta.className="small";meta.textContent="Ár: "+row.price+" pont";const b=document.createElement("button");b.textContent="Megvásárlás";b.disabled=row.player_id===currentUser.id;b.onclick=async()=>{b.disabled=true;try{const {data:result,error}=await supabase.rpc("purchase_market_listing",{p_listing_id:row.id});if(error)throw error;message(result?.message||"A vásárlás feldolgozva.");await loadPoints(currentUser.id);await loadMarket();}catch(e){message("A vásárlás nem sikerült: "+e.message);b.disabled=false;}};card.append(h,p,meta,b);c.append(card);});}
-$("createListing").addEventListener("click",async()=>{const title=$("listingTitle").value.trim(),description=$("listingDescription").value.trim(),price=Number($("listingPrice").value);if(!title||!description){message("Add meg a nyom címét és a részleges információt.");return;}if(description.length>500||price<1||price>1000||!Number.isInteger(price)){message("Az ár 1–1000 egész pont lehet.");return;}if(/teljes megoldás|a tettes:|a gyilkos:|a megfejtés:/i.test(title+" "+description)){message("Ne hirdess meg teljes megoldást vagy végső megfejtést. Csak részleges nyomot adj meg.");return;}try{const {error}=await supabase.rpc("create_market_listing",{p_title:title,p_description:description,p_price:price});if(error)throw error;$("listingTitle").value="";$("listingDescription").value="";message("Az ajánlatod megjelent a piacon.");await loadMarket();}catch(e){message("A hirdetés nem sikerült: "+e.message+" — az SQL-kiegészítés telepítése szükséges.");}});
-const {data:sessionData}=await supabase.auth.getSession();if(sessionData?.session){currentUser=sessionData.session.user;$("landing").hidden=true;$("dashboard").hidden=false;await loadProfile(currentUser);showRoute("home",{noHistory:true});}
-supabase.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_IN"&&session){currentUser=session.user;$("landing").hidden=true;$("dashboard").hidden=false;loadProfile(currentUser).then(()=>showRoute("home",{noHistory:true}));}if(event==="SIGNED_OUT"){currentUser=null;$("landing").hidden=false;$("dashboard").hidden=true;Object.values(routeScreens).forEach(id=>$(id).hidden=true);}});
+
+$("saveProfile").addEventListener("click",async()=>{
+  if(!currentUser)return;
+  const username=$("profileUsernameInput").value.trim(),avatar=$("profileAvatarInput").value.trim();
+  if(!/^[A-Za-z0-9_]{3,20}$/.test(username)){message("A felhasználónév 3–20 karakteres lehet; angol betűt, számot és aláhúzásjelet használj.");return;}
+  if(avatar&&!/^https:\/\/\S+/i.test(avatar)){message("A profilkép URL-je https:// kezdetű legyen.");return;}
+  const btn=$("saveProfile");btn.disabled=true;
+  try{
+    const {data:existing,error:checkError}=await supabase.from("profiles").select("id,username").ilike("username",username);
+    if(checkError)throw checkError;
+    if((existing||[]).some(p=>p.id!==currentUser.id)){throw new Error("Ez a felhasználónév már foglalt.");}
+    const {error:updateError}=await supabase.from("profiles").upsert({id:currentUser.id,username,avatar_url:avatar||null},{onConflict:"id"});
+    if(updateError)throw updateError;
+    const {error:metaError}=await supabase.auth.updateUser({data:{username}});
+    if(metaError)console.warn("A profil mentve, de az Auth metaadat nem frissült:",metaError.message);
+    $("playerUsername").textContent=username;profileCache={...(profileCache||{}),id:currentUser.id,username,avatar_url:avatar||null};
+    message("Profilbeállítások mentve.");updateAvatarPreview(avatar);
+  }catch(e){message("A profil mentése nem sikerült: "+e.message);}
+  finally{btn.disabled=false;}
+});
+
+async function loadCases(){
+  const c=$("casesContent");c.replaceChildren();c.textContent="Akták betöltése…";
+  const {data,error}=await supabase.from("cases").select("id,title,description,difficulty,points_reward,credits_reward").eq("is_published",true).order("published_at",{ascending:false});
+  c.replaceChildren();if(error){c.textContent="Nem sikerült betölteni az aktákat: "+error.message;return;}
+  caseCache=data||[];if(!caseCache.length){c.innerHTML='<div class="empty">Jelenleg nincs publikált ügy.</div>';return;}
+  caseCache.forEach(item=>{
+    const card=document.createElement("article");card.className="card case-card";
+    const h=document.createElement("h3");h.textContent="📁 "+item.title;
+    const p=document.createElement("p");p.textContent=item.description||"Ehhez az ügyhöz még nincs leírás.";
+    const meta=document.createElement("p");meta.className="small";meta.textContent="Nehézség: "+(item.difficulty||"ismeretlen")+" · Pontjutalom: "+(item.points_reward??0);
+    const b=document.createElement("button");b.textContent="Ügy megnyitása";b.onclick=()=>{currentCase=item;showRoute("case");};
+    card.append(h,p,meta,b);c.append(card);
+  });
+}
+async function renderCase(item){
+  $("caseTitle").textContent=item.title;$("caseDescription").textContent=item.description||"";
+  $("caseMeta").textContent="Nehézség: "+(item.difficulty||"ismeretlen")+" · Pontjutalom: "+(item.points_reward??0);
+  $("evidenceContent").textContent="Bizonyítékok betöltése…";$("questionsContent").textContent="Kérdések betöltése…";
+  const [er,qr]=await Promise.all([
+    supabase.from("case_evidence").select("id,title,content,evidence_order").eq("case_id",item.id).order("evidence_order",{ascending:true}),
+    supabase.from("case_questions").select("id,question_text,question_order,points").eq("case_id",item.id).order("question_order",{ascending:true})
+  ]);
+  const ec=$("evidenceContent");ec.replaceChildren();
+  if(er.error)ec.textContent="A bizonyítékok betöltése sikertelen: "+er.error.message;
+  else if(!er.data?.length)ec.innerHTML='<div class="empty">Ehhez az ügyhöz még nincs bizonyíték.</div>';
+  else er.data.forEach(e=>{const b=document.createElement("div");b.className="evidence";const h=document.createElement("strong");h.textContent=e.title;const p=document.createElement("p");p.textContent=e.content;b.append(h,p);ec.append(b);});
+  const qc=$("questionsContent");qc.replaceChildren();
+  if(qr.error){qc.textContent="A kérdések betöltése sikertelen: "+qr.error.message;return;}
+  if(!qr.data?.length){qc.innerHTML='<div class="empty">Ehhez az ügyhöz még nincs kérdés.</div>';return;}
+  qr.data.forEach(q=>{
+    const block=document.createElement("div");block.className="question";
+    const label=document.createElement("label");label.textContent=q.question_text;
+    const input=document.createElement("input");input.placeholder="Írd ide a megfejtésed";input.autocomplete="off";
+    const button=document.createElement("button");button.textContent="Válasz beküldése";
+    const result=document.createElement("p");result.className="small";
+    button.onclick=async()=>{
+      if(!input.value.trim()){result.textContent="Előbb írd be a válaszodat.";return;}
+      button.disabled=true;result.textContent="Ellenőrzés…";
+      try{
+        const {data,error}=await supabase.rpc("submit_case_answer",{p_question_id:q.id,p_answer:input.value.trim()});
+        if(error)throw error;
+        result.textContent=data?.message||"Válasz ellenőrizve.";
+        if(data?.success){result.textContent+=" +"+(Number(data.points_awarded)||0)+" pont.";input.disabled=true;await loadPoints(currentUser.id);}
+        else button.disabled=false;
+      }catch(e){result.textContent="Beküldési hiba: "+e.message;button.disabled=false;}
+    };
+    block.append(label,input,button,result);qc.append(block);
+  });
+}
+async function loadLeaderboard(){
+  const n=$("seasonName"),c=$("leaderboardContent");n.textContent="Bajnokság betöltése…";c.replaceChildren();
+  try{
+    const {data:season,error:se}=await supabase.from("seasons").select("id,name").eq("status","active").maybeSingle();
+    if(se)throw se;if(!season){n.textContent="Jelenleg nincs aktív bajnokság.";return;}
+    n.textContent=season.name;
+    const {data:players,error}=await supabase.rpc("get_weekly_leaderboard");if(error)throw error;
+    const filtered=(players||[]).filter(p=>!p.season_id||String(p.season_id)===String(season.id)).sort((a,b)=>(Number(b.total_points)||0)-(Number(a.total_points)||0)).slice(0,20);
+    if(!filtered.length){c.innerHTML='<div class="empty">Még nincs megjeleníthető bajnoki eredmény.</div>';return;}
+    const list=document.createElement("ol");
+    filtered.forEach((p,i)=>{const li=document.createElement("li");li.textContent=(i+1)+". "+(p.username||"Névtelen nyomozó")+" — "+(Number(p.total_points)||0)+" pont · "+(Number(p.cases_completed)||0)+" megoldott ügy";list.append(li);if(currentUser&&(p.player_id===currentUser.id||p.id===currentUser.id))$("playerRank").textContent="#"+(i+1);});
+    c.append(list);
+  }catch(e){n.textContent="A ranglista nem tölthető be.";c.textContent="Adatbázisüzenet: "+e.message;}
+}
+async function loadMyCases(){
+  const c=$("mycasesContent");c.replaceChildren();c.textContent="Saját eredmények betöltése…";
+  const {data,error}=await supabase.from("case_attempts").select("id,player_id,question_id,is_correct").eq("player_id",currentUser.id).limit(100);
+  c.replaceChildren();
+  if(error){c.textContent="Az Aktáim listája nem érhető el: "+error.message;return;}
+  if(!data?.length){c.innerHTML='<div class="empty">Még nincs rögzített válaszpróbálkozásod. Nyiss meg egy aktát, és kezdd el a nyomozást!</div>';$("playerSolved").textContent="0";return;}
+  const list=document.createElement("div");
+  data.forEach((a,i)=>{const card=document.createElement("article");card.className="card case-card";const h=document.createElement("h3");h.textContent="Próbálkozás "+(i+1);const p=document.createElement("p");p.textContent="Kérdésazonosító: "+(a.question_id||"—");const s=document.createElement("span");s.className="pill";s.textContent=a.is_correct?"HELYES VÁLASZ":"PRÓBÁLKOZÁS";card.append(h,p,s);list.append(card);});
+  c.append(list);$("playerSolved").textContent=String(data.filter(a=>a.is_correct).length);
+}
+function renderProfile(){
+  $("profileEmail").textContent=currentUser.email||"";$("profileId").textContent=currentUser.id;
+  $("profileUsernameInput").value=profileCache?.username||currentUser.user_metadata?.username||"";
+  $("profileAvatarInput").value=profileCache?.avatar_url||"";
+  updateAvatarPreview(profileCache?.avatar_url||"");
+}
+async function loadWallet(){
+  await loadPoints(currentUser.id);
+  const c=$("transactionsContent");c.replaceChildren();c.textContent="Tranzakciók betöltése…";
+  const {data,error}=await supabase.from("transactions").select("id,amount,transaction_type,description,created_at").eq("player_id",currentUser.id).order("created_at",{ascending:false}).limit(50);
+  c.replaceChildren();
+  if(error){c.textContent="A tranzakciók nem tölthetők be: "+error.message;return;}
+  if(!data?.length){c.innerHTML='<div class="empty">Még nincs rögzített tranzakció.</div>';return;}
+  data.forEach(t=>{
+    const card=document.createElement("article");card.className="card case-card";
+    const h=document.createElement("h3");h.textContent=t.description||t.transaction_type||"Tranzakció";
+    const p=document.createElement("p");p.textContent="Összeg: "+(Number(t.amount)>0?"+":"")+Number(t.amount||0).toLocaleString("hu-HU")+" kredit";
+    const m=document.createElement("p");m.className="small";m.textContent=t.created_at?new Date(t.created_at).toLocaleString("hu-HU"):"";
+    card.append(h,p,m);c.append(card);
+  });
+}
+$("refreshWallet").addEventListener("click",()=>loadWallet());
+
+function getFirst(row,keys){for(const key of keys){const v=row?.[key];if(v!==undefined&&v!==null&&String(v).trim()!=="")return v;}return null;}
+async function loadCharacters(){
+  const c=$("charactersContent");c.replaceChildren();c.textContent="Karakterek betöltése…";
+  const {data,error}=await supabase.from("characters").select("*").limit(100);
+  c.replaceChildren();
+  if(error){c.textContent="A karakterek nem tölthetők be: "+error.message;return;}
+  if(!data?.length){c.innerHTML='<div class="empty">Még nincs karakter az adatbázisban.</div>';return;}
+  const grid=document.createElement("div");grid.className="character-grid";
+  data.forEach(row=>{
+    const name=getFirst(row,["name","character_name","title","full_name","display_name"])||"Ismeretlen karakter";
+    const imageUrl=getFirst(row,["image_url","photo_url","avatar_url","portrait_url","image","photo","picture_url"]);
+    const description=getFirst(row,["description","bio","backstory","background","details"])||"Ehhez a karakterhez még nincs leírás.";
+    const role=getFirst(row,["role","occupation","character_role","position"]);
+    const card=document.createElement("article");card.className="card character-card";
+    if(imageUrl&&/^https?:\/\//i.test(String(imageUrl))){const img=document.createElement("img");img.loading="lazy";img.src=imageUrl;img.alt=String(name);img.onerror=()=>{img.style.display="none";};card.append(img);}
+    const info=document.createElement("div");info.className="character-info";
+    const h=document.createElement("h3");h.textContent=String(name);
+    info.append(h);
+    if(role){const r=document.createElement("p");r.className="small";r.textContent=String(role);info.append(r);}
+    const p=document.createElement("p");p.textContent=String(description);info.append(p);
+    card.append(info);grid.append(card);
+  });
+  c.append(grid);
+}
+
+async function loadMarket(){
+  const c=$("marketContent");c.replaceChildren();c.textContent="Aktív ajánlatok betöltése…";
+  const caseSelect=$("listingCase");
+  const {data:cases,error:caseError}=await supabase.from("cases").select("id,title").eq("is_published",true).order("title");
+  caseSelect.replaceChildren();
+  const firstOption=document.createElement("option");firstOption.value="";firstOption.textContent=caseError?"Az ügyek nem tölthetők be":"Válassz egy ügyet";caseSelect.append(firstOption);
+  if(!caseError&&cases){cases.forEach(item=>{const option=document.createElement("option");option.value=item.id;option.textContent=item.title;caseSelect.append(option);});}
+  const {data,error}=await supabase.from("market_listings").select("id,title,price,seller_id,case_id,created_at").eq("status","active").order("created_at",{ascending:false}).limit(50);
+  c.replaceChildren();
+  if(error){c.textContent="A piac betöltése sikertelen: "+error.message;return;}
+  if(!data?.length){c.innerHTML='<div class="empty">Jelenleg nincs aktív ajánlat.</div>';return;}
+  const caseNames=new Map((cases||[]).map(item=>[item.id,item.title]));
+  data.forEach(row=>{
+    const card=document.createElement("article");card.className="card case-card";
+    const h=document.createElement("h3");h.textContent=row.title;
+    const caseName=document.createElement("p");caseName.textContent="Ügy: "+(caseNames.get(row.case_id)||"Ismeretlen ügy");
+    const meta=document.createElement("p");meta.className="small";meta.textContent="Ár: "+row.price+" kredit";
+    const b=document.createElement("button");b.textContent="Megvásárlás";b.disabled=row.seller_id===currentUser.id;
+    b.onclick=async()=>{
+      b.disabled=true;
+      try{
+        const {data:result,error}=await supabase.rpc("purchase_market_listing",{p_listing_id:row.id});
+        if(error)throw error;
+        if(!result?.success)throw new Error(result?.message||"A vásárlás nem sikerült.");
+        message(result.message||"Sikeres vásárlás.");await loadPoints(currentUser.id);await loadMarket();
+      }catch(e){message("A vásárlás sikertelen: "+e.message);b.disabled=false;}
+    };
+    card.append(h,caseName,meta,b);c.append(card);
+  });
+}
+$("createListing").addEventListener("click",async()=>{
+  const caseId=$("listingCase").value,title=$("listingTitle").value.trim(),description=$("listingDescription").value.trim(),price=Number($("listingPrice").value),button=$("createListing");
+  if(!caseId){message("Válassz egy ügyet a hirdetéshez.");return;}
+  if(title.length<5||title.length>60){message("A cím 5–60 karakter hosszú legyen.");return;}
+  if(description.length<40||description.length>400){message("A leírás 40–400 karakter hosszú legyen.");return;}
+  if(!Number.isInteger(price)||price<1||price>50){message("Az ár 1–50 kredit lehet.");return;}
+  if(/teljes megoldás|helyes válasz|a tettes neve|az elkövető neve|ő a gyilkos|a gyilkos neve/i.test(title+" "+description)){message("Teljes megoldást vagy a tettes nevét ne hirdesd meg.");return;}
+  button.disabled=true;
+  try{
+    const {data:result,error}=await supabase.rpc("create_market_listing",{p_case_id:caseId,p_title:title,p_description:description,p_price:price});
+    if(error)throw error;
+    if(!result?.success)throw new Error(result?.message||"A hirdetés létrehozása sikertelen.");
+    $("listingTitle").value="";$("listingDescription").value="";$("listingPrice").value="10";$("listingCase").value="";
+    message(result.message||"A hirdetés sikeresen létrejött.");await loadMarket();
+  }catch(e){message("A hirdetés nem sikerült: "+e.message);}
+  finally{button.disabled=false;}
+});
+
+const {data:sessionData}=await supabase.auth.getSession();
+if(sessionData?.session){currentUser=sessionData.session.user;$("landing").hidden=true;$("dashboard").hidden=false;await loadProfile(currentUser);showRoute("home",{noHistory:true});}
+supabase.auth.onAuthStateChange((event,session)=>{
+  if(event==="SIGNED_IN"&&session){currentUser=session.user;$("landing").hidden=true;$("dashboard").hidden=false;loadProfile(currentUser).then(()=>showRoute("home",{noHistory:true}));}
+  if(event==="SIGNED_OUT"){currentUser=null;$("landing").hidden=false;$("dashboard").hidden=true;Object.values(routeScreens).forEach(id=>$(id).hidden=true);}
+});
 </script>
-</body></html>
+</body>
+</html>
