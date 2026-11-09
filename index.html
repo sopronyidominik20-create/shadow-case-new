@@ -2,516 +2,535 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080a10">
-<title>SHADOW CASE — Nyomozói központ</title>
-<style>
-:root{--bg:#080a10;--panel:#121722;--line:#2b3445;--text:#f3f5fa;--muted:#aab3c2;--gold:#d5ad63;--red:#b83b45;--green:#6ec49a}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;background-image:linear-gradient(90deg,rgba(8,10,16,.96),rgba(8,10,16,.82)),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=85');background-size:cover;background-attachment:fixed;background-position:center}
-header{position:sticky;top:0;z-index:5;background:rgba(8,10,16,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:16px max(5%,calc((100% - 1180px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px}
-.brand{font-weight:900;letter-spacing:3px}.gold{color:var(--gold)}.small{font-size:12px;color:#929bad}
-main{max-width:1180px;margin:auto;padding:32px 20px 55px}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:3px;font-weight:bold}h1{font-size:clamp(34px,6vw,64px);line-height:1.02;margin:14px 0}h2{margin-top:0}p{color:var(--muted);line-height:1.65}
-.panel,.card{background:rgba(18,23,34,.94);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:0 14px 40px #0003}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(225px,100%),1fr));gap:15px;margin:24px 0}.menu-card{min-height:195px;position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(18,23,34,.96),rgba(18,23,34,.78))}
-.menu-card:after{content:"";position:absolute;right:-18px;bottom:-35px;width:125px;height:125px;border-radius:50%;border:1px solid #d5ad6333;box-shadow:0 0 0 18px #d5ad6310,0 0 0 38px #d5ad6308;pointer-events:none}
-button{padding:12px 15px;margin-top:10px;background:var(--gold);color:#111;border:0;border-radius:5px;font-weight:bold;cursor:pointer}button:hover{filter:brightness(1.08)}button:disabled{opacity:.5;cursor:wait}button.secondary{background:transparent;color:var(--text);border:1px solid #465064}button.danger{background:#57262d;color:#fff}.menu-card button{width:100%;position:relative;z-index:1}
-label{display:block;margin-top:14px;color:var(--muted);font-size:13px}input,select,textarea{width:100%;margin-top:7px;padding:13px;background:#090b10;color:white;border:1px solid #394357;border-radius:5px;font:inherit}textarea{min-height:90px;resize:vertical}.auth-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}.screen{animation:fade .22s ease}@keyframes fade{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
-.evidence{margin:12px 0;padding:16px;border-left:3px solid var(--gold);background:#090b10;border-radius:4px}.case-card{margin:12px 0}.question{padding:18px 0;border-top:1px solid var(--line)}.result{margin-top:10px;padding:12px;border:1px solid var(--line);border-radius:5px;overflow-wrap:anywhere}.pill{display:inline-block;border:1px solid #4b5362;border-radius:30px;padding:5px 9px;font-size:12px;color:var(--gold)}.statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:20px 0}.stat{background:#090b10;border:1px solid var(--line);padding:15px;border-radius:7px}.stat strong{display:block;color:var(--gold);font-size:22px;margin-top:6px}
-#status{display:none;margin-top:16px;padding:13px;border:1px solid var(--line);border-radius:6px;overflow-wrap:anywhere}[hidden]{display:none!important}ol{padding-left:25px}li{padding:11px 6px;border-bottom:1px solid var(--line);line-height:1.6}.empty{padding:18px;border:1px dashed #465064;border-radius:7px;color:var(--muted)}footer{text-align:center;color:#929bad;padding:25px;border-top:1px solid var(--line);font-size:12px}
-.character-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px;margin:18px 0}.character-card{padding:0;overflow:hidden}.character-card img{width:100%;height:240px;object-fit:cover;display:block;background:#090b10}.character-card .character-info{padding:15px}.avatar-preview{width:88px;height:88px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);background:#090b10}.wallet-line{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.notice{padding:12px;border:1px solid #6b542d;background:#241d12;border-radius:6px;color:#e7cf9e;margin:12px 0}
-@media(max-width:560px){header{padding:14px 5%;font-size:12px;letter-spacing:1px}main{padding:24px 13px}.panel,.card{padding:17px}.auth-buttons{grid-template-columns:1fr}.topline button{margin-top:0}.character-card img{height:210px}}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080411">
+<title>AKASZTÓFA ONLINE</title>
 
-/* SHADOW CASE – interaktív nyomozás */
-.investigation-hero{padding:24px;border:1px solid #394357;border-radius:10px;background:linear-gradient(120deg,#101622ee,#080a10dd),url('https://images.unsplash.com/photo-1453873531674-2151bcd01707?auto=format&fit=crop&w=1400&q=80') center/cover;margin:18px 0}
-.case-level{display:inline-block;border:1px solid #d5ad63;color:#d5ad63;border-radius:30px;padding:5px 10px;font-size:12px}
-.investigation-progress{height:7px;background:#252d3b;border-radius:9px;overflow:hidden;margin:12px 0}
-.investigation-progress span{display:block;height:100%;width:0;background:#d5ad63;transition:width .3s}
-.investigation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:13px;margin:18px 0}
-.suspect-card{padding:0;overflow:hidden;border:1px solid #394357;border-radius:8px;background:#10151f;cursor:pointer;transition:transform .2s,border-color .2s;text-align:left;color:var(--text);margin-top:0}
-.suspect-card:hover{transform:translateY(-3px);border-color:#d5ad63}
-.suspect-card.selected{border:2px solid #d5ad63;box-shadow:0 0 0 2px #d5ad6322}
-.suspect-card img{width:100%;height:220px;object-fit:cover;display:block;background:#090b10}
-.suspect-card .suspect-info{padding:12px}
-.suspect-card h4{margin:0 0 6px}
-.suspect-card p{font-size:12px;margin:5px 0}
-.clue-card{background:#090b10;border-left:3px solid #d5ad63;padding:14px;margin:10px 0;border-radius:4px}
-.interactive-question{border-top:1px solid #30394a;padding:18px 0}
-.interactive-question textarea{min-height:75px}
-.interactive-feedback{padding:13px;margin-top:12px;border-radius:6px;background:#101722;border:1px solid #394357}
-.interactive-feedback.good{border-color:#438e69;color:#a8e7c3}
-.interactive-feedback.bad{border-color:#a84b53;color:#ffc0c5}
-.investigation-video{width:100%;max-height:440px;background:#000;border-radius:8px;margin:12px 0}
-@media(max-width:520px){.suspect-card img{height:185px}.investigation-hero{padding:17px}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Orbitron:wght@500;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<header><div class="brand">SHADOW <span class="gold">CASE</span></div><div class="small">BIZALMAS NYOMOZÓI HÁLÓZAT</div></header>
-<main>
-<section id="landing" class="screen">
-  <div class="eyebrow">BIZALMAS NYOMOZÓI AKTÁK</div>
-  <h1>MINDENKINEK<br>VAN <span class="gold">TITKA.</span></h1>
-  <p>Vizsgáld meg a bizonyítékokat, fedezd fel az ellentmondásokat, és oldd meg az ügyeket. Versenyezz a többi nyomozóval a heti bajnokságban!</p>
-  <div class="grid">
-    <article class="card"><span class="pill">01 / NYOMOZÁS</span><h3>Rakd össze a történetet</h3><p>Bizonyítékok, kérdések és rejtett összefüggések.</p></article>
-    <article class="card"><span class="pill">02 / BAJNOKSÁG</span><h3>Nyerd meg a hetet</h3><p>Szerezz pontokat, és kerülj a ranglista élére.</p></article>
-    <article class="card"><span class="pill">03 / INFORMÁCIÓ</span><h3>Minden nyom számít</h3><p>Az információs piacon részleges nyomokat cserélhetsz.</p></article>
+
+<div class="bg-grid"></div>
+<div class="glow glow-left"></div>
+<div class="glow glow-right"></div>
+
+<header class="topbar">
+
+  <a class="brand" href="#" data-view="home">
+    <span class="brand-symbol">A<span>✦</span></span>
+    <span class="brand-copy">
+      AKASZTÓFA
+      <small>O N L I N E</small>
+    </span>
+  </a>
+
+  <nav class="main-nav">
+    <button class="nav-link active" data-view="home">⌂ Kezdőlap</button>
+    <button class="nav-link" data-view="games">▦ Játékok</button>
+    <button class="nav-link" data-view="ranking">♛ Ranglista</button>
+    <button class="nav-link" data-view="duel">⚔ Kihívások</button>
+  </nav>
+
+  <div class="top-actions">
+    <button class="icon-button">♧</button>
+    <button class="avatar-btn" id="profileButton">?</button>
+    <button class="menu-toggle" id="menuToggle">☰</button>
   </div>
-  <section class="panel">
-    <h2>Nyomozói fiók</h2><p>Új fiókhoz adj meg egyedi felhasználónevet. Meglévő fiókkal e-mail-címmel és jelszóval lépj be.</p>
-    <label for="username">Felhasználónév (3–20 karakter)</label><input id="username" minlength="3" maxlength="20" autocomplete="username" placeholder="Például: Nyomozo_01">
-    <label for="email">E-mail-cím</label><input id="email" type="email" autocomplete="email" placeholder="pelda@email.com">
-    <label for="password">Jelszó (legalább 6 karakter)</label><input id="password" type="password" minlength="6" autocomplete="current-password" placeholder="Jelszó">
-    <div class="auth-buttons"><button id="register">Regisztráció</button><button id="login" class="secondary">Bejelentkezés</button></div>
-  </section>
+
+</header>
+
+<main class="dashboard">
+
+<!-- KEZDŐLAP -->
+
+<section id="homeView" class="view active">
+
+<div class="home-grid">
+
+<div class="main-column">
+
+<section class="hero">
+
+<div class="hero-copy">
+
+<div class="eyebrow">
+<span class="pulse"></span>
+ONLINE AKASZTÓFA PLATFORM
+</div>
+
+<h1>
+AKASZTÓFA
+<span>ONLINE</span>
+</h1>
+
+<p class="hero-sub">
+TALÁLD KI A SZÓT, GYŐZD LE AZ ELLENFELEIDET,
+ÉS KERÜLJ A RANGLISTA ÉLÉRE!
+</p>
+
+<div class="hero-actions">
+<button class="btn btn-main" data-view="games">
+▶ JÁTÉK INDÍTÁSA
+</button>
+
+<button class="btn btn-outline" id="howButton">
+ⓘ HOGYAN MŰKÖDIK?
+</button>
+</div>
+
+<div class="hero-tags">
+<span>✦ 12 KATEGÓRIA</span>
+<span>♛ RANGLISTA</span>
+<span>⚡ NAPI KIHÍVÁS</span>
+</div>
+
+</div>
+
+<div class="hero-character">
+
+<div class="character-orbit orbit-a"></div>
+<div class="character-orbit orbit-b"></div>
+<div class="character-aura"></div>
+
+<div class="character-card">
+<div class="hood"></div>
+
+<div class="face">
+<span class="eye">×</span>
+<span class="eye">×</span>
+<span class="mouth">⌁</span>
+</div>
+
+<div class="hood-shadow"></div>
+<div class="hoodie"></div>
+<div class="chest-mark">✦</div>
+</div>
+
+<div class="hanging-rope"><span></span></div>
+
+<div class="floating-label label-one">
+WORD<br><b>HUNTER</b>
+</div>
+
+<div class="floating-label label-two">
+LVL. 01
+<b>+150 XP</b>
+</div>
+
+<div class="hero-spark spark-a">✧</div>
+<div class="hero-spark spark-b">✦</div>
+
+</div>
 </section>
 
-<section id="dashboard" hidden class="screen">
-  <div class="eyebrow">HOZZÁFÉRÉS ENGEDÉLYEZVE</div><h1>NYOMOZÓI<br><span class="gold">KÖZPONT.</span></h1>
-  <p>Üdv, <strong id="playerUsername">Nyomozó</strong> · <span id="playerEmail"></span></p>
-  <div class="statrow">
-    <div class="stat">Elérhető kredited<strong id="playerPoints">Betöltés…</strong></div>
-    <div class="stat">Heti helyezés<strong id="playerRank">—</strong></div>
-    <div class="stat">Helyes válaszaid<strong id="playerSolved">—</strong></div>
-  </div>
-  <div class="grid">
-    <article class="card menu-card"><span class="pill">01</span><h3>🕵️ Nyomozás</h3><p>Nyisd meg az aktákat, vizsgáld meg a nyomokat.</p><button data-route="cases">Akták megtekintése</button></article>
-    <article class="card menu-card"><span class="pill">02</span><h3>📁 Aktáim</h3><p>Korábbi próbálkozásaid és helyes válaszaid.</p><button data-route="mycases">Aktáim megnyitása</button></article>
-    <article class="card menu-card"><span class="pill">03</span><h3>🏆 Bajnokság</h3><p>Heti pontverseny és nyomozói ranglista.</p><button data-route="championship">Ranglista megnyitása</button></article>
-    <article class="card menu-card"><span class="pill">04</span><h3>👤 Profilom és beállítások</h3><p>Felhasználónév, profilkép és fiókadatok.</p><button data-route="profile">Profil megnyitása</button></article>
-    <article class="card menu-card"><span class="pill">05</span><h3>🪙 Wallet / pénztárca</h3><p>Kredit-egyenleged és tranzakcióid.</p><button data-route="wallet">Pénztárca megnyitása</button></article>
-    <article class="card menu-card"><span class="pill">06</span><h3>🕶️ Karakterek</h3><p>Ismerd meg az ügyek szereplőit.</p><button data-route="characters">Karakterek megtekintése</button></article>
-    <article class="card menu-card"><span class="pill">07</span><h3>🪙 Információs piac</h3><p>Részleges nyomok adásvétele játékosok között.</p><button data-route="market">Piac megnyitása</button></article>
-    <article class="card menu-card"><span class="pill">08 / INTERAKTÍV ÜGYEK</span><h3>🎬 Filmszerű nyomozás</h3><p>Gyanúsítottak, vallomások, bizonyítékok és videós nyomok.</p><button data-route="interactive">Interaktív ügyek megnyitása</button></article>
-  </div>
-  <button id="logout" class="secondary">Kijelentkezés</button>
+<div class="section-title">
+<div>
+<small>VÁLASZD KI A KIHÍVÁST</small>
+<h2>JÁTÉKMÓDOK</h2>
+</div>
+<button class="see-all" data-view="games">ÖSSZES JÁTÉKMÓD ↗</button>
+</div>
+
+<div class="mode-grid">
+
+<article class="mode-card mode-solo">
+<div class="mode-icon">♙</div>
+<div class="mode-meta">01 / EGYÉNI JÁTÉK</div>
+<h3>SOLO</h3>
+<p>Játssz egyedül, fejleszd a tudásod és gyűjts XP-t!</p>
+<button data-mode="solo">JÁTÉK <b>▶</b></button>
+</article>
+
+<article class="mode-card mode-duel">
+<span class="hot-label">2 JÁTÉKMÓD</span>
+<div class="mode-icon">⚔</div>
+<div class="mode-meta">02 / PÁRBAJ</div>
+<h3>DUEL</h3>
+<p>Hívd ki egy másik játékost! Versenyezzetek egymással!</p>
+<button data-mode="duel">PÁRBAJ <b>▶</b></button>
+</article>
+
+<article class="mode-card mode-tournament">
+<div class="mode-icon">♛</div>
+<div class="mode-meta">03 / BAJNOKSÁG</div>
+<h3>TOURNAMENT</h3>
+<p>Vegyél részt bajnokságokon, és légy a legjobb!</p>
+<button data-mode="tournament">NEVEZÉS <b>▶</b></button>
+</article>
+
+</div>
+
+<div class="feature-strip">
+<div><span class="feature-ico">▣</span><b>12+ kategória</b><small>Változatos szavak</small></div>
+<div><span class="feature-ico">▥</span><b>Ranglisták</b><small>Mutasd meg, mit tudsz</small></div>
+<div><span class="feature-ico">◉</span><b>Szintek</b><small>Fejlődj minden körrel</small></div>
+<div><span class="feature-ico">♛</span><b>Achievementek</b><small>Gyűjts jelvényeket</small></div>
+</div>
+
+<section class="panel categories-panel">
+
+<div class="section-title compact">
+<div>
+<small>VÁLASSZ TÉMÁT</small>
+<h2>KATEGÓRIÁK</h2>
+</div>
+<span class="count-pill">12 KATEGÓRIA</span>
+</div>
+
+<div class="category-grid">
+<button class="category" data-category="Vegyes"><span>✧</span>Vegyes</button>
+<button class="category" data-category="Állatok"><span>♧</span>Állatok</button>
+<button class="category" data-category="Országok"><span>◎</span>Országok</button>
+<button class="category" data-category="Ételek"><span>◇</span>Ételek</button>
+<button class="category" data-category="Filmek"><span>▣</span>Filmek</button>
+<button class="category" data-category="Sport"><span>⚡</span>Sport</button>
+<button class="category" data-category="Foglalkozások"><span>⌘</span>Foglalkozások</button>
+<button class="category" data-category="Természet"><span>❋</span>Természet</button>
+<button class="category" data-category="Tárgyak"><span>▱</span>Tárgyak</button>
+<button class="category" data-category="Városok"><span>⌖</span>Városok</button>
+<button class="category" data-category="Zene"><span>♫</span>Zene</button>
+<button class="category" data-category="Nehéz szavak"><span>✹</span>Nehéz szavak</button>
+</div>
+
 </section>
 
-<section id="screen-cases" class="screen" hidden><div class="topline"><div><div class="eyebrow">AKTÁK / NYOMOZÁS</div><h2>Elérhető ügyek</h2></div><button class="secondary" data-route="home">← Vissza</button></div><div id="casesContent"></div></section>
-<section id="screen-case" class="screen" hidden><div class="topline"><div><div class="eyebrow">BIZALMAS DOSSZIÉ</div><h2 id="caseTitle">Ügy</h2></div><button class="secondary" data-route="cases">← Vissza az aktákhoz</button></div><p id="caseDescription"></p><p class="small" id="caseMeta"></p><h3>Bizonyítékok</h3><div id="evidenceContent"></div><h3>Kérdések</h3><div id="questionsContent"></div><div id="caseMessage" class="result" hidden></div></section>
-<section id="screen-mycases" class="screen" hidden><div class="topline"><div><div class="eyebrow">SZEMÉLYES ARCHÍVUM</div><h2>Aktáim</h2></div><button class="secondary" data-route="home">← Vissza</button></div><div id="mycasesContent"></div></section>
-<section id="screen-championship" class="screen" hidden><div class="topline"><div><div class="eyebrow">HETI VERSENY</div><h2>Bajnokság és ranglista</h2></div><button class="secondary" data-route="home">← Vissza</button></div><p id="seasonName">Bajnokság betöltése…</p><div id="leaderboardContent"></div></section>
-<section id="screen-profile" class="screen" hidden>
-  <div class="topline"><div><div class="eyebrow">NYOMOZÓI DOSSZIÉ</div><h2>Profilom és beállítások</h2></div><button class="secondary" data-route="home">← Vissza</button></div>
-  <div class="panel">
-    <div class="wallet-line"><img id="avatarPreview" class="avatar-preview" alt="Profilkép" hidden><div><p>E-mail: <strong id="profileEmail"></strong></p><p>Játékosazonosító: <span class="small" id="profileId"></span></p></div></div>
-    <label for="profileUsernameInput">Felhasználónév (3–20 karakter)</label><input id="profileUsernameInput" minlength="3" maxlength="20">
-    <label for="profileAvatarInput">Profilkép URL (opcionális)</label><input id="profileAvatarInput" type="url" placeholder="https://.../profilkep.jpg">
-    <button id="saveProfile">Profilbeállítások mentése</button>
-    <p class="small">A profilképhez nyilvánosan elérhető HTTPS-képlinket adj meg.</p>
-  </div>
-</section>
-<section id="screen-wallet" class="screen" hidden><div class="topline"><div><div class="eyebrow">KREDITKÖZPONT</div><h2>Wallet / pénztárca</h2></div><button class="secondary" data-route="home">← Vissza</button></div><div class="panel"><p>Elérhető egyenleged</p><h1><span id="walletBalance" class="gold">—</span> <span style="font-size:22px">kredit</span></h1><button id="refreshWallet" class="secondary">Egyenleg frissítése</button></div><h3>Tranzakciós előzmények</h3><div id="transactionsContent"></div><p class="small">A kreditek játékbeli pontok. Ez a felület nem kezel valódi pénzt.</p></section>
-<section id="screen-characters" class="screen" hidden><div class="topline"><div><div class="eyebrow">SZEREPLŐK / DOSSIÉK</div><h2>Karakterek</h2></div><button class="secondary" data-route="home">← Vissza</button></div><div id="charactersContent"></div></section>
-<section id="screen-market" class="screen" hidden>
-  <div class="topline"><div><div class="eyebrow">NYOMKERESKEDELEM</div><h2>Információs piac</h2></div><button class="secondary" data-route="home">← Vissza</button></div>
-  <p>Válassz egy ügyet, és kínálj fel egy részleges nyomot más nyomozóknak.</p>
-  <div class="panel"><h3>Új információ meghirdetése</h3>
-    <label for="listingCase">Kapcsolódó ügy</label><select id="listingCase"><option value="">Ügyek betöltése…</option></select>
-    <label for="listingTitle">Nyom címe (5–60 karakter)</label><input id="listingTitle" minlength="5" maxlength="60" placeholder="Például: A tanú vallomásának ellentmondása">
-    <label for="listingDescription">Részleges információ (40–400 karakter)</label><textarea id="listingDescription" minlength="40" maxlength="400" placeholder="Írd le a megvásárolható nyomot."></textarea>
-    <label for="listingPrice">Ár (1–50 kredit)</label><input id="listingPrice" type="number" min="1" max="50" value="10">
-    <button id="createListing">Nyom meghirdetése</button>
-  </div>
-  <h3>Aktív ajánlatok</h3><div id="marketContent"></div>
-  <div class="notice">Adatvédelmi megjegyzés: a meglévő adatbázisban az ajánlat leírása az aktív hirdetés rekordjában van. A valóban titkos, csak vásárlás után látható tartalomhoz külön, szerveroldali védelem szükséges; a jelenlegi séma önmagában nem garantálja ezt.</div>
-</section>
+</div>
 
-<section id="screen-interactive" class="screen" hidden>
-  <div class="topline">
-    <div><div class="eyebrow">KÜLÖNLEGES NYOMOZÁSI EGYSÉG</div><h2>Interaktív ügyek</h2></div>
-    <button class="secondary" data-route="home">← Vissza</button>
-  </div>
-  <div class="investigation-hero">
-    <span class="case-level">1. ÜGY · KÖZEPES NEHÉZSÉG</span>
-    <h2>Az utolsó vonat</h2>
-    <p>23:17-kor egy vasútállomás melletti irodában holtan találták a biztonsági vezetőt. Az ajtó belülről zárva volt. Négy ember állítja, hogy a gyilkosság idején máshol tartózkodott – de az egyik vallomás gyanús.</p>
-    <div class="investigation-progress"><span id="investigationProgress"></span></div>
-    <p class="small" id="investigationStepLabel">0 / 5 nyomozási lépés teljesítve</p>
-  </div>
-  <div class="panel">
-    <h3>Bizonyítékok</h3>
-    <div class="clue-card"><strong>📹 Biztonsági napló</strong><p>23:04-kor a hátsó folyosó kamerája 47 másodpercre leállt. A főbejárati kamera végig működött.</p></div>
-    <div class="clue-card"><strong>🕰️ Megállt óra</strong><p>Az irodában lévő falióra 23:11-et mutatott. A szakértő szerint az óra ütés következtében állt meg, nem az elem merült le.</p></div>
-    <div class="clue-card"><strong>🧤 Nedves kesztyű</strong><p>Egy nedves kesztyűt találtak a hátsó kijárat közelében. Aznap este 22:50 és 23:20 között esett az eső.</p></div>
-    <div class="clue-card"><strong>🚆 Vonatmenetrend</strong><p>Az utolsó vonat 23:10-kor indult. A peronra a főbejáraton vagy a hátsó folyosón keresztül lehetett eljutni.</p></div>
-  </div>
-  <h3>Gyanúsítottak – válassz portré alapján</h3>
-  <p class="small">A szereplők fiktívek. A portrók illusztrációs célú, internetes képek.</p>
-  <div class="investigation-grid" id="suspectGrid">
-    <button type="button" class="suspect-card" data-suspect="anna"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=85" alt="Anna Varga portré"><div class="suspect-info"><h4>Anna Varga</h4><p>Állomásvezető</p><p>„23:00-kor már hazafelé indultam.”</p></div></button>
-    <button type="button" class="suspect-card" data-suspect="balint"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=85" alt="Bálint Fekete portré"><div class="suspect-info"><h4>Bálint Fekete</h4><p>Biztonsági őr</p><p>„Végig a főbejáratnál álltam.”</p></div></button>
-    <button type="button" class="suspect-card" data-suspect="csilla"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=600&q=85" alt="Csilla Tóth portré"><div class="suspect-info"><h4>Csilla Tóth</h4><p>Jegypénztáros</p><p>„23:10-kor láttam indulni az utolsó vonatot.”</p></div></button>
-    <button type="button" class="suspect-card" data-suspect="david"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=85" alt="Dávid Molnár portré"><div class="suspect-info"><h4>Dávid Molnár</h4><p>Karbantartó</p><p>„A kamerához aznap hozzá sem nyúltam.”</p></div></button>
-  </div>
-  <div class="panel">
-    <h3>Nyomozási napló</h3>
-    <div class="interactive-question">
-      <span class="pill">1 / 5 · GYANÚSÍTOTT</span><h3>Kit tartasz jelenleg a leggyanúsabbnak?</h3>
-      <p>Válassz egy arcot a fenti portrék közül, majd rögzítsd a döntésedet.</p>
-      <button id="submitSuspect">Gyanúsított rögzítése</button><div id="suspectFeedback" class="interactive-feedback" hidden></div>
-    </div>
-    <div class="interactive-question">
-      <span class="pill">2 / 5 · SZABAD VÁLASZ</span><h3>Mikor állt le a hátsó folyosó kamerája?</h3>
-      <label for="cameraAnswer">Írd be az időpontot</label><input id="cameraAnswer" placeholder="Például: 23:04">
-      <button id="submitCamera">Válasz ellenőrzése</button><div id="cameraFeedback" class="interactive-feedback" hidden></div>
-    </div>
-    <div class="interactive-question">
-      <span class="pill">3 / 5 · LOGIKAI FELADAT</span><h3>Ki mondott ellent a bizonyítékoknak?</h3>
-      <p>Válaszd ki azt, akinek a vallomása gyanús a rendelkezésre álló információ alapján.</p>
-      <select id="lieAnswer"><option value="">Válassz gyanúsítottat…</option><option value="anna">Anna Varga</option><option value="balint">Bálint Fekete</option><option value="csilla">Csilla Tóth</option><option value="david">Dávid Molnár</option></select>
-      <button id="submitLie">Vallomás ellenőrzése</button><div id="lieFeedback" class="interactive-feedback" hidden></div>
-    </div>
-    <div class="interactive-question">
-      <span class="pill">4 / 5 · VIDEÓS NYOM</span><h3>Figyeld meg a helyszínt</h3>
-      <p>A következő rövid videó csak hangulat- és megfigyelési próba, nem a fiktív ügy bizonyítéka. A történethez illő videót később külön kell elkészíteni vagy feltölteni.</p>
-      <video class="investigation-video" controls preload="metadata"><source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">A böngésződ nem támogatja a videólejátszást.</video>
-      <label for="videoAnswer">Melyik bizonyítékot kellene először újra megvizsgálni?</label>
-      <select id="videoAnswer"><option value="">Válassz…</option><option value="camera">A kameranaplót</option><option value="weather">Az időjárás-jelentést</option><option value="menu">Az étlapot</option></select>
-      <button id="submitVideo">Megfigyelés rögzítése</button><div id="videoFeedback" class="interactive-feedback" hidden></div>
-    </div>
-    <div class="interactive-question">
-      <span class="pill">5 / 5 · VÉGSŐ MEGFEJTÉS</span><h3>Mi a végső következtetésed?</h3>
-      <p>Írd le, kit tartasz gyanúsnak, hogyan juthatott be, és melyik bizonyíték támasztja alá az elméletedet.</p>
-      <label for="finalAnswer">Saját megfejtés</label><textarea id="finalAnswer" placeholder="Szerintem a tettes… azért, mert…"></textarea>
-      <button id="submitFinal">Megfejtés lezárása</button><div id="finalFeedback" class="interactive-feedback" hidden></div>
-    </div>
-  </div>
+<!-- JOBB OLDALI PANEL -->
+
+<aside class="right-rail">
+
+<section class="profile-mini panel">
+
+<div class="mini-top">
+<span>JÁTÉKOS PROFIL</span>
+<button class="tiny-arrow" id="profileButton2">↗</button>
+</div>
+
+<div class="mini-player">
+<div class="mini-avatar">W</div>
+<div>
+<b id="miniName">WordHunter</b>
+<small>Level 1 · Kezdő</small>
+</div>
+</div>
+
+<div class="xp-row">
+<span>2 450 / 3 000 XP</span>
+<b>82%</b>
+</div>
+
+<div class="xp-bar"><i></i></div>
+
+<div class="wallet">
+<span>🟡 <b>3 280</b></span>
+<span>✦ <b>120</b></span>
+</div>
+
 </section>
 
-<div id="status" role="status" aria-live="polite"></div>
-</main><footer>SHADOW CASE · MINDEN ÜGYNEK VAN MEGOLDÁSA</footer>
+<section class="panel daily-card">
 
-<script type="module">
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-const SUPABASE_URL="https://cwmcfizvgqpuhdyueriz.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY="sb_publishable_iEMl71FRGMQZ5dIgQI2z9w_PdQn8iHm";
-const supabase=createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-const $=id=>document.getElementById(id);
-let currentUser=null,currentCase=null,pointsBalance=0,caseCache=[],profileCache=null;
-const routes=["home","cases","case","mycases","championship","profile","wallet","characters","market","interactive"];
-const routeScreens={cases:"screen-cases",case:"screen-case",mycases:"screen-mycases",championship:"screen-championship",profile:"screen-profile",wallet:"screen-wallet",characters:"screen-characters",market:"screen-market",interactive:"screen-interactive"};
-function message(t){$("status").style.display="block";$("status").textContent=t}
-function clearMessage(){$("status").style.display="none";$("status").textContent=""}
-function safeText(v){return v===null||v===undefined?"":String(v)}
-function showRoute(route,opts={}) {
-  if(!routes.includes(route))route="home";
-  if(route!=="home"&&!currentUser){route="home";message("A folytatáshoz előbb jelentkezz be.");}
-  $("landing").hidden=!!currentUser;
-  $("dashboard").hidden=!currentUser||route!=="home";
-  Object.values(routeScreens).forEach(id=>$(id).hidden=true);
-  if(route!=="home"&&routeScreens[route])$(routeScreens[route]).hidden=false;
-  if(!opts.noHistory)history.pushState({route,caseId:route==="case"?currentCase?.id:null},"","#"+route+(route==="case"&&currentCase?"-"+currentCase.id:""));
-  if(opts.keepMessage!==true)clearMessage();
-  if(route==="cases")loadCases();
-  if(route==="case"&&currentCase)renderCase(currentCase);
-  if(route==="mycases")loadMyCases();
-  if(route==="championship")loadLeaderboard();
-  if(route==="profile")renderProfile();
-  if(route==="wallet")loadWallet();
-  if(route==="characters")loadCharacters();
-  if(route==="market")loadMarket();
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-window.addEventListener("popstate",e=>{const state=e.state||{};if(state.route==="case"&&state.caseId){const found=caseCache.find(c=>String(c.id)===String(state.caseId));if(found)currentCase=found;}showRoute(state.route||"home",{noHistory:true});});
-document.querySelectorAll("[data-route]").forEach(b=>b.addEventListener("click",()=>showRoute(b.dataset.route)));
+<div class="rail-title">
+<span>▣</span>
+<div>
+<small>MAI FELADAT</small>
+<b>Napi kihívás</b>
+</div>
+</div>
 
-async function loadProfile(user){
-  $("playerEmail").textContent=user.email||"";
-  $("profileEmail").textContent=user.email||"";
-  $("profileId").textContent=user.id;
-  const {data,error}=await supabase.from("profiles").select("*").eq("id",user.id).maybeSingle();
-  if(!error&&data)profileCache=data;else profileCache=null;
-  const username=profileCache?.username||user.user_metadata?.username||"Nyomozó";
-  $("playerUsername").textContent=username;
-  $("profileUsernameInput").value=username;
-  $("profileAvatarInput").value=profileCache?.avatar_url||"";
-  updateAvatarPreview(profileCache?.avatar_url||"");
-  await loadPoints(user.id);
-}
-function updateAvatarPreview(url){
-  const img=$("avatarPreview");
-  if(url&&/^https:\/\/\S+/i.test(url)){img.src=url;img.hidden=false;img.onerror=()=>{img.hidden=true;};}
-  else{img.removeAttribute("src");img.hidden=true;}
-}
-$("profileAvatarInput").addEventListener("input",e=>updateAvatarPreview(e.target.value.trim()));
-async function loadPoints(uid){
-  const {data,error}=await supabase.from("wallets").select("balance").eq("player_id",uid).maybeSingle();
-  if(error){console.warn(error);$("playerPoints").textContent="—";pointsBalance=0;}
-  else{pointsBalance=Number(data?.balance??0)||0;$("playerPoints").textContent=pointsBalance.toLocaleString("hu-HU");}
-  $("profilePoints")?.textContent;
-  if($("walletBalance"))$("walletBalance").textContent=pointsBalance.toLocaleString("hu-HU");
-}
-async function authAction(kind){
-  const username=$("username").value.trim(),email=$("email").value.trim(),password=$("password").value;
-  if(!email||!password){message("Add meg az e-mail-címedet és a jelszavadat.");return;}
-  if(password.length<6){message("A jelszó legalább 6 karakter hosszú legyen.");return;}
-  if(kind==="register"&&!/^[A-Za-z0-9_]{3,20}$/.test(username)){message("A felhasználónév 3–20 karakteres lehet; angol betűt, számot és aláhúzásjelet használj.");return;}
-  $("register").disabled=$("login").disabled=true;
-  try{
-    let result;
-    if(kind==="register"){
-      const {data:existing,error:checkError}=await supabase.from("profiles").select("username").ilike("username",username);
-      if(checkError)throw new Error("Felhasználónév-ellenőrzési hiba: "+checkError.message);
-      if(existing?.length){message("Ez a felhasználónév már foglalt.");return;}
-      result=await supabase.auth.signUp({email,password,options:{data:{username}}});
-    }else result=await supabase.auth.signInWithPassword({email,password});
-    if(result.error)throw result.error;
-    if(result.data.session){
-      currentUser=result.data.user;$("landing").hidden=true;$("dashboard").hidden=false;
-      await loadProfile(currentUser);showRoute("home",{keepMessage:true});
-      message(kind==="register"?"Sikeres regisztráció!":"Sikeres bejelentkezés!");
-    }else message("Regisztráció elindult. Ellenőrizd az e-mailjeidet, és erősítsd meg a címedet, ha levelet kaptál.");
-  }catch(e){message("Nem sikerült: "+(e.message||"Ismeretlen hiba"));}
-  finally{$("register").disabled=$("login").disabled=false;}
-}
-$("register").addEventListener("click",()=>authAction("register"));
-$("login").addEventListener("click",()=>authAction("login"));
-$("logout").addEventListener("click",async()=>{const {error}=await supabase.auth.signOut();if(error)message(error.message);else{currentUser=null;showRoute("home");$("landing").hidden=false;$("dashboard").hidden=true;message("Sikeresen kijelentkeztél.");}});
+<p>Találj ki 3 szót hibátlanul, és gyűjts extra jutalmakat!</p>
 
-$("saveProfile").addEventListener("click",async()=>{
-  if(!currentUser)return;
-  const username=$("profileUsernameInput").value.trim(),avatar=$("profileAvatarInput").value.trim();
-  if(!/^[A-Za-z0-9_]{3,20}$/.test(username)){message("A felhasználónév 3–20 karakteres lehet; angol betűt, számot és aláhúzásjelet használj.");return;}
-  if(avatar&&!/^https:\/\/\S+/i.test(avatar)){message("A profilkép URL-je https:// kezdetű legyen.");return;}
-  const btn=$("saveProfile");btn.disabled=true;
-  try{
-    const {data:existing,error:checkError}=await supabase.from("profiles").select("id,username").ilike("username",username);
-    if(checkError)throw checkError;
-    if((existing||[]).some(p=>p.id!==currentUser.id)){throw new Error("Ez a felhasználónév már foglalt.");}
-    const {error:updateError}=await supabase.from("profiles").upsert({id:currentUser.id,username,avatar_url:avatar||null},{onConflict:"id"});
-    if(updateError)throw updateError;
-    const {error:metaError}=await supabase.auth.updateUser({data:{username}});
-    if(metaError)console.warn("A profil mentve, de az Auth metaadat nem frissült:",metaError.message);
-    $("playerUsername").textContent=username;profileCache={...(profileCache||{}),id:currentUser.id,username,avatar_url:avatar||null};
-    message("Profilbeállítások mentve.");updateAvatarPreview(avatar);
-  }catch(e){message("A profil mentése nem sikerült: "+e.message);}
-  finally{btn.disabled=false;}
-});
+<div class="mission-bar">
+<i id="dailyProgress"></i>
+</div>
 
-async function loadCases(){
-  const c=$("casesContent");c.replaceChildren();c.textContent="Akták betöltése…";
-  const {data,error}=await supabase.from("cases").select("id,title,description,difficulty,points_reward,credits_reward").eq("is_published",true).order("published_at",{ascending:false});
-  c.replaceChildren();if(error){c.textContent="Nem sikerült betölteni az aktákat: "+error.message;return;}
-  caseCache=data||[];if(!caseCache.length){c.innerHTML='<div class="empty">Jelenleg nincs publikált ügy.</div>';return;}
-  caseCache.forEach(item=>{
-    const card=document.createElement("article");card.className="card case-card";
-    const h=document.createElement("h3");h.textContent="📁 "+item.title;
-    const p=document.createElement("p");p.textContent=item.description||"Ehhez az ügyhöz még nincs leírás.";
-    const meta=document.createElement("p");meta.className="small";meta.textContent="Nehézség: "+(item.difficulty||"ismeretlen")+" · Pontjutalom: "+(item.points_reward??0);
-    const b=document.createElement("button");b.textContent="Ügy megnyitása";b.onclick=()=>{currentCase=item;showRoute("case");};
-    card.append(h,p,meta,b);c.append(card);
-  });
-}
-async function renderCase(item){
-  $("caseTitle").textContent=item.title;$("caseDescription").textContent=item.description||"";
-  $("caseMeta").textContent="Nehézség: "+(item.difficulty||"ismeretlen")+" · Pontjutalom: "+(item.points_reward??0);
-  $("evidenceContent").textContent="Bizonyítékok betöltése…";$("questionsContent").textContent="Kérdések betöltése…";
-  const [er,qr]=await Promise.all([
-    supabase.from("case_evidence").select("id,title,content,evidence_order").eq("case_id",item.id).order("evidence_order",{ascending:true}),
-    supabase.from("case_questions").select("id,question_text,question_order,points").eq("case_id",item.id).order("question_order",{ascending:true})
-  ]);
-  const ec=$("evidenceContent");ec.replaceChildren();
-  if(er.error)ec.textContent="A bizonyítékok betöltése sikertelen: "+er.error.message;
-  else if(!er.data?.length)ec.innerHTML='<div class="empty">Ehhez az ügyhöz még nincs bizonyíték.</div>';
-  else er.data.forEach(e=>{const b=document.createElement("div");b.className="evidence";const h=document.createElement("strong");h.textContent=e.title;const p=document.createElement("p");p.textContent=e.content;b.append(h,p);ec.append(b);});
-  const qc=$("questionsContent");qc.replaceChildren();
-  if(qr.error){qc.textContent="A kérdések betöltése sikertelen: "+qr.error.message;return;}
-  if(!qr.data?.length){qc.innerHTML='<div class="empty">Ehhez az ügyhöz még nincs kérdés.</div>';return;}
-  qr.data.forEach(q=>{
-    const block=document.createElement("div");block.className="question";
-    const label=document.createElement("label");label.textContent=q.question_text;
-    const input=document.createElement("input");input.placeholder="Írd ide a megfejtésed";input.autocomplete="off";
-    const button=document.createElement("button");button.textContent="Válasz beküldése";
-    const result=document.createElement("p");result.className="small";
-    button.onclick=async()=>{
-      if(!input.value.trim()){result.textContent="Előbb írd be a válaszodat.";return;}
-      button.disabled=true;result.textContent="Ellenőrzés…";
-      try{
-        const {data,error}=await supabase.rpc("submit_case_answer",{p_question_id:q.id,p_answer:input.value.trim()});
-        if(error)throw error;
-        result.textContent=data?.message||"Válasz ellenőrizve.";
-        if(data?.success){result.textContent+=" +"+(Number(data.points_awarded)||0)+" pont.";input.disabled=true;await loadPoints(currentUser.id);}
-        else button.disabled=false;
-      }catch(e){result.textContent="Beküldési hiba: "+e.message;button.disabled=false;}
-    };
-    block.append(label,input,button,result);qc.append(block);
-  });
-}
-async function loadLeaderboard(){
-  const n=$("seasonName"),c=$("leaderboardContent");n.textContent="Bajnokság betöltése…";c.replaceChildren();
-  try{
-    const {data:season,error:se}=await supabase.from("seasons").select("id,name").eq("status","active").maybeSingle();
-    if(se)throw se;if(!season){n.textContent="Jelenleg nincs aktív bajnokság.";return;}
-    n.textContent=season.name;
-    const {data:players,error}=await supabase.rpc("get_weekly_leaderboard");if(error)throw error;
-    const filtered=(players||[]).filter(p=>!p.season_id||String(p.season_id)===String(season.id)).sort((a,b)=>(Number(b.total_points)||0)-(Number(a.total_points)||0)).slice(0,20);
-    if(!filtered.length){c.innerHTML='<div class="empty">Még nincs megjeleníthető bajnoki eredmény.</div>';return;}
-    const list=document.createElement("ol");
-    filtered.forEach((p,i)=>{const li=document.createElement("li");li.textContent=(i+1)+". "+(p.username||"Névtelen nyomozó")+" — "+(Number(p.total_points)||0)+" pont · "+(Number(p.cases_completed)||0)+" megoldott ügy";list.append(li);if(currentUser&&(p.player_id===currentUser.id||p.id===currentUser.id))$("playerRank").textContent="#"+(i+1);});
-    c.append(list);
-  }catch(e){n.textContent="A ranglista nem tölthető be.";c.textContent="Adatbázisüzenet: "+e.message;}
-}
-async function loadMyCases(){
-  const c=$("mycasesContent");c.replaceChildren();c.textContent="Saját eredmények betöltése…";
-  const {data,error}=await supabase.from("case_attempts").select("id,player_id,question_id,is_correct").eq("player_id",currentUser.id).limit(100);
-  c.replaceChildren();
-  if(error){c.textContent="Az Aktáim listája nem érhető el: "+error.message;return;}
-  if(!data?.length){c.innerHTML='<div class="empty">Még nincs rögzített válaszpróbálkozásod. Nyiss meg egy aktát, és kezdd el a nyomozást!</div>';$("playerSolved").textContent="0";return;}
-  const list=document.createElement("div");
-  data.forEach((a,i)=>{const card=document.createElement("article");card.className="card case-card";const h=document.createElement("h3");h.textContent="Próbálkozás "+(i+1);const p=document.createElement("p");p.textContent="Kérdésazonosító: "+(a.question_id||"—");const s=document.createElement("span");s.className="pill";s.textContent=a.is_correct?"HELYES VÁLASZ":"PRÓBÁLKOZÁS";card.append(h,p,s);list.append(card);});
-  c.append(list);$("playerSolved").textContent=String(data.filter(a=>a.is_correct).length);
-}
-function renderProfile(){
-  $("profileEmail").textContent=currentUser.email||"";$("profileId").textContent=currentUser.id;
-  $("profileUsernameInput").value=profileCache?.username||currentUser.user_metadata?.username||"";
-  $("profileAvatarInput").value=profileCache?.avatar_url||"";
-  updateAvatarPreview(profileCache?.avatar_url||"");
-}
-async function loadWallet(){
-  await loadPoints(currentUser.id);
-  const c=$("transactionsContent");c.replaceChildren();c.textContent="Tranzakciók betöltése…";
-  const {data,error}=await supabase.from("transactions").select("id,amount,transaction_type,description,created_at").eq("player_id",currentUser.id).order("created_at",{ascending:false}).limit(50);
-  c.replaceChildren();
-  if(error){c.textContent="A tranzakciók nem tölthetők be: "+error.message;return;}
-  if(!data?.length){c.innerHTML='<div class="empty">Még nincs rögzített tranzakció.</div>';return;}
-  data.forEach(t=>{
-    const card=document.createElement("article");card.className="card case-card";
-    const h=document.createElement("h3");h.textContent=t.description||t.transaction_type||"Tranzakció";
-    const p=document.createElement("p");p.textContent="Összeg: "+(Number(t.amount)>0?"+":"")+Number(t.amount||0).toLocaleString("hu-HU")+" kredit";
-    const m=document.createElement("p");m.className="small";m.textContent=t.created_at?new Date(t.created_at).toLocaleString("hu-HU"):"";
-    card.append(h,p,m);c.append(card);
-  });
-}
-$("refreshWallet").addEventListener("click",()=>loadWallet());
+<div class="mission-bottom">
+<span id="dailyCount">0 / 3 TELJESÍTVE</span>
+<b>+150 XP · +50</b>
+</div>
 
-function getFirst(row,keys){for(const key of keys){const v=row?.[key];if(v!==undefined&&v!==null&&String(v).trim()!=="")return v;}return null;}
-async function loadCharacters(){
-  const c=$("charactersContent");c.replaceChildren();c.textContent="Karakterek betöltése…";
-  const {data,error}=await supabase.from("characters").select("*").limit(100);
-  c.replaceChildren();
-  if(error){c.textContent="A karakterek nem tölthetők be: "+error.message;return;}
-  if(!data?.length){c.innerHTML='<div class="empty">Még nincs karakter az adatbázisban.</div>';return;}
-  const grid=document.createElement("div");grid.className="character-grid";
-  data.forEach(row=>{
-    const name=getFirst(row,["name","character_name","title","full_name","display_name"])||"Ismeretlen karakter";
-    const imageUrl=getFirst(row,["image_url","photo_url","avatar_url","portrait_url","image","photo","picture_url"]);
-    const description=getFirst(row,["description","bio","backstory","background","details"])||"Ehhez a karakterhez még nincs leírás.";
-    const role=getFirst(row,["role","occupation","character_role","position"]);
-    const card=document.createElement("article");card.className="card character-card";
-    if(imageUrl&&/^https?:\/\//i.test(String(imageUrl))){const img=document.createElement("img");img.loading="lazy";img.src=imageUrl;img.alt=String(name);img.onerror=()=>{img.style.display="none";};card.append(img);}
-    const info=document.createElement("div");info.className="character-info";
-    const h=document.createElement("h3");h.textContent=String(name);
-    info.append(h);
-    if(role){const r=document.createElement("p");r.className="small";r.textContent=String(role);info.append(r);}
-    const p=document.createElement("p");p.textContent=String(description);info.append(p);
-    card.append(info);grid.append(card);
-  });
-  c.append(grid);
-}
+</section>
 
-async function loadMarket(){
-  const c=$("marketContent");c.replaceChildren();c.textContent="Aktív ajánlatok betöltése…";
-  const caseSelect=$("listingCase");
-  const {data:cases,error:caseError}=await supabase.from("cases").select("id,title").eq("is_published",true).order("title");
-  caseSelect.replaceChildren();
-  const firstOption=document.createElement("option");firstOption.value="";firstOption.textContent=caseError?"Az ügyek nem tölthetők be":"Válassz egy ügyet";caseSelect.append(firstOption);
-  if(!caseError&&cases){cases.forEach(item=>{const option=document.createElement("option");option.value=item.id;option.textContent=item.title;caseSelect.append(option);});}
-  const {data,error}=await supabase.from("market_listings").select("id,title,price,seller_id,case_id,created_at").eq("status","active").order("created_at",{ascending:false}).limit(50);
-  c.replaceChildren();
-  if(error){c.textContent="A piac betöltése sikertelen: "+error.message;return;}
-  if(!data?.length){c.innerHTML='<div class="empty">Jelenleg nincs aktív ajánlat.</div>';return;}
-  const caseNames=new Map((cases||[]).map(item=>[item.id,item.title]));
-  data.forEach(row=>{
-    const card=document.createElement("article");card.className="card case-card";
-    const h=document.createElement("h3");h.textContent=row.title;
-    const caseName=document.createElement("p");caseName.textContent="Ügy: "+(caseNames.get(row.case_id)||"Ismeretlen ügy");
-    const meta=document.createElement("p");meta.className="small";meta.textContent="Ár: "+row.price+" kredit";
-    const b=document.createElement("button");b.textContent="Megvásárlás";b.disabled=row.seller_id===currentUser.id;
-    b.onclick=async()=>{
-      b.disabled=true;
-      try{
-        const {data:result,error}=await supabase.rpc("purchase_market_listing",{p_listing_id:row.id});
-        if(error)throw error;
-        if(!result?.success)throw new Error(result?.message||"A vásárlás nem sikerült.");
-        message(result.message||"Sikeres vásárlás.");await loadPoints(currentUser.id);await loadMarket();
-      }catch(e){message("A vásárlás sikertelen: "+e.message);b.disabled=false;}
-    };
-    card.append(h,caseName,meta,b);c.append(card);
-  });
-}
-$("createListing").addEventListener("click",async()=>{
-  const caseId=$("listingCase").value,title=$("listingTitle").value.trim(),description=$("listingDescription").value.trim(),price=Number($("listingPrice").value),button=$("createListing");
-  if(!caseId){message("Válassz egy ügyet a hirdetéshez.");return;}
-  if(title.length<5||title.length>60){message("A cím 5–60 karakter hosszú legyen.");return;}
-  if(description.length<40||description.length>400){message("A leírás 40–400 karakter hosszú legyen.");return;}
-  if(!Number.isInteger(price)||price<1||price>50){message("Az ár 1–50 kredit lehet.");return;}
-  if(/teljes megoldás|helyes válasz|a tettes neve|az elkövető neve|ő a gyilkos|a gyilkos neve/i.test(title+" "+description)){message("Teljes megoldást vagy a tettes nevét ne hirdesd meg.");return;}
-  button.disabled=true;
-  try{
-    const {data:result,error}=await supabase.rpc("create_market_listing",{p_case_id:caseId,p_title:title,p_description:description,p_price:price});
-    if(error)throw error;
-    if(!result?.success)throw new Error(result?.message||"A hirdetés létrehozása sikertelen.");
-    $("listingTitle").value="";$("listingDescription").value="";$("listingPrice").value="10";$("listingCase").value="";
-    message(result.message||"A hirdetés sikeresen létrejött.");await loadMarket();
-  }catch(e){message("A hirdetés nem sikerült: "+e.message);}
-  finally{button.disabled=false;}
-});
+<section class="panel weekly-card">
 
-const {data:sessionData}=await supabase.auth.getSession();
-if(sessionData?.session){currentUser=sessionData.session.user;$("landing").hidden=true;$("dashboard").hidden=false;await loadProfile(currentUser);showRoute("home",{noHistory:true});}
-supabase.auth.onAuthStateChange((event,session)=>{
-  if(event==="SIGNED_IN"&&session){currentUser=session.user;$("landing").hidden=true;$("dashboard").hidden=false;loadProfile(currentUser).then(()=>showRoute("home",{noHistory:true}));}
-  if(event==="SIGNED_OUT"){currentUser=null;$("landing").hidden=false;$("dashboard").hidden=true;Object.values(routeScreens).forEach(id=>$(id).hidden=true);}
-});
+<div class="rail-title">
+<span>♛</span>
+<div>
+<small>VERSENY A CSÚCSRA</small>
+<b>Heti ranglista</b>
+</div>
+<button class="tiny-arrow" data-view="ranking">↗</button>
+</div>
 
-// ---- Interaktív ügy: Az utolsó vonat (bemutató prototípus) ----
-const interactiveState={done:new Set(),suspect:""};
-function updateInvestigationProgress(){
-  const count=interactiveState.done.size;
-  const bar=$("investigationProgress"),label=$("investigationStepLabel");
-  if(bar)bar.style.width=(count/5*100)+"%";
-  if(label)label.textContent=count+" / 5 nyomozási lépés teljesítve";
-}
-function investigationFeedback(id,text,kind){
-  const el=$(id);if(!el)return;
-  el.hidden=false;el.className="interactive-feedback"+(kind?" "+kind:"");el.textContent=text;
-}
-function completeInvestigationStep(step){interactiveState.done.add(step);updateInvestigationProgress();}
-document.querySelectorAll("[data-suspect]").forEach(card=>card.addEventListener("click",()=>{
-  document.querySelectorAll("[data-suspect]").forEach(c=>c.classList.remove("selected"));
-  card.classList.add("selected");interactiveState.suspect=card.dataset.suspect;
-}));
-$("submitSuspect")?.addEventListener("click",()=>{
-  if(!interactiveState.suspect){investigationFeedback("suspectFeedback","Előbb válassz egy gyanúsítottat.","bad");return;}
-  const names={anna:"Anna Varga",balint:"Bálint Fekete",csilla:"Csilla Tóth",david:"Dávid Molnár"};
-  investigationFeedback("suspectFeedback","Rögzítetted a gyanúdat: "+names[interactiveState.suspect]+". A nyomozás végén még változtathatsz a következtetéseden.","");
-  completeInvestigationStep("suspect");
-});
-$("submitCamera")?.addEventListener("click",()=>{
-  const value=$("cameraAnswer").value.trim().replace(/\s/g,"");
-  if(value==="23:04"||value==="2304"){investigationFeedback("cameraFeedback","Helyes: a hátsó folyosó kamerája 23:04-kor állt le.","good");completeInvestigationStep("camera");}
-  else investigationFeedback("cameraFeedback","Ez nem egyezik a bizonyítékkal. Vizsgáld meg újra a biztonsági naplót.","bad");
-});
-$("submitLie")?.addEventListener("click",()=>{
-  const value=$("lieAnswer").value;
-  if(value==="david"){investigationFeedback("lieFeedback","Jó észrevétel: Dávid vallomása gyanús, de ez önmagában még nem bizonyítja, hogy ő a tettes.","good");completeInvestigationStep("lie");}
-  else if(!value)investigationFeedback("lieFeedback","Válassz ki egy gyanúsítottat.","bad");
-  else investigationFeedback("lieFeedback","A jelenlegi nyomok alapján ez a vallomás még nem cáfolható egyértelműen. Nézd meg újra a bizonyítékokat.","bad");
-});
-$("submitVideo")?.addEventListener("click",()=>{
-  const value=$("videoAnswer").value;
-  if(value==="camera"){investigationFeedback("videoFeedback","Helyes nyomozói döntés: a kameranapló közvetlenül kapcsolódik a 47 másodperces kieséshez.","good");completeInvestigationStep("video");}
-  else investigationFeedback("videoFeedback","Válassz olyan bizonyítékot, amely közvetlenül kapcsolódik a 47 másodperces kamerakieséshez.","bad");
-});
-$("submitFinal")?.addEventListener("click",()=>{
-  const value=$("finalAnswer").value.trim();
-  if(value.length<30){investigationFeedback("finalFeedback","Írj részletesebb magyarázatot: nevezd meg a gyanúsítottat, a lehetséges módszert és az elméletedet alátámasztó bizonyítékot.","bad");return;}
-  investigationFeedback("finalFeedback","A megfejtésedet rögzítetted ebben a böngészőnézetben. Ez a prototípus még nem menti az adatbázisba, nem ellenőrzi szerveroldalon a tettest, és nem ad ranglistapontot.","good");
-  completeInvestigationStep("final");
-});
-updateInvestigationProgress();
+<div id="rankingList" class="mini-ranking">
+<div class="mini-rank"><i>1</i><b>NightWolf</b><span>4 820</span></div>
+<div class="mini-rank"><i>2</i><b>LordGames</b><span>4 210</span></div>
+<div class="mini-rank"><i>3</i><b>AkAszToMester</b><span>3 840</span></div>
+<div class="mini-rank"><i>4</i><b>WordHunter</b><span>2 450</span></div>
+</div>
 
-</script>
+<button class="ranking-link" data-view="ranking">TELJES RANGLISTA →</button>
+
+</section>
+
+<section class="panel streak-card">
+<div class="streak-flame">♨</div>
+<div>
+<small>JÁTÉKOS SOROZAT</small>
+<b>Építsd a győzelmi szériád!</b>
+<p>Minden nap egy új esély a fejlődésre.</p>
+</div>
+</section>
+
+</aside>
+</div>
+</section>
+
+<!-- JÁTÉKMÓDOK -->
+
+<section id="gamesView" class="view">
+
+<div class="page-heading">
+<small>VÁLASZD KI A KIHÍVÁST</small>
+<h1>JÁTÉKMÓDOK</h1>
+<p>Három út. Egy cél: te legyél a szó mestere.</p>
+</div>
+
+<div class="mode-grid mode-grid-page">
+
+<article class="mode-card mode-solo">
+<div class="mode-icon">♙</div>
+<div class="mode-meta">01 / EGYÉNI JÁTÉK</div>
+<h3>SOLO</h3>
+<p>Találd ki a rendszer által választott szót.</p>
+<button data-mode="solo">SOLO INDÍTÁSA ▶</button>
+</article>
+
+<article class="mode-card mode-duel">
+<div class="mode-icon">⚔</div>
+<div class="mode-meta">02 / KÉT JÁTÉKOS</div>
+<h3>DUEL</h3>
+<p>Közös titkos szó vagy egymásnak feladott kihívás.</p>
+<button data-mode="duel">DUEL LOBBI ▶</button>
+</article>
+
+<article class="mode-card mode-tournament">
+<div class="mode-icon">♛</div>
+<div class="mode-meta">03 / BAJNOKSÁG</div>
+<h3>TOURNAMENT</h3>
+<p>Versenyezz a többiekkel kieséses bajnokságban.</p>
+<button data-mode="tournament">BAJNOKSÁGOK ▶</button>
+</article>
+
+</div>
+</section>
+
+<!-- AKASZTÓFA JÁTÉK -->
+
+<section id="gameView" class="view">
+
+<div class="game-top">
+<button class="back-link" data-view="games">← VISSZA</button>
+<span class="game-badge" id="gameModeLabel">SOLO / VEGYES</span>
+</div>
+
+<div class="game-layout">
+
+<section class="panel hangman-panel">
+
+<div class="section-title compact">
+<div>
+<small>A KÖR FOLYAMATBAN</small>
+<h2 id="gameTitle">TALÁLD KI A SZÓT</h2>
+</div>
+<div class="lives" id="lives">♥ ♥ ♥ ♥ ♥ ♥</div>
+</div>
+
+<div class="hangman-stage">
+<svg id="hangmanSvg" viewBox="0 0 260 240">
+<g class="scaffold">
+<path d="M34 218H220M75 218V24H174V48"/>
+</g>
+<g class="person">
+<circle cx="174" cy="72" r="20"/>
+<path d="M174 92V151M174 108L145 132M174 108L202 132M174 151L148 190M174 151L200 190"/>
+</g>
+</svg>
+</div>
+
+<div class="word-slots" id="wordSlots"></div>
+<div class="game-hint" id="gameHint">Válassz egy betűt!</div>
+<div class="keyboard" id="keyboard"></div>
+
+<div class="game-footer">
+<span id="guessCount">0 / 6 HIBA</span>
+<button class="btn btn-outline" id="newWordButton">↻ ÚJ SZÓ</button>
+</div>
+
+</section>
+
+<aside class="panel game-side">
+<small>JÁTÉKADATOK</small>
+<div class="side-stat"><span>KATEGÓRIA</span><b id="currentCategory">VEGYES</b></div>
+<div class="side-stat"><span>NEHÉZSÉG</span><b id="currentDifficulty">KÖZEPES</b></div>
+<div class="side-stat"><span>MEGFEJTETT SZAVAK</span><b id="solvedCount">0</b></div>
+<div class="side-stat"><span>MEGSZERZETT XP</span><b id="earnedXp">0</b></div>
+</aside>
+
+</div>
+</section>
+
+<!-- DUEL -->
+
+<section id="duelView" class="view">
+
+<div class="page-heading">
+<small>KÉT JÁTÉKOS. EGY GYŐZTES.</small>
+<h1>DUEL LOBBI</h1>
+<p>Válaszd ki a párbaj típusát!</p>
+</div>
+
+<div class="duel-options">
+
+<article class="panel duel-option">
+<div class="mode-icon">⚡</div>
+<small>01 / AZONOS FELADVÁNY</small>
+<h2>PÁRHUZAMOS PÁRBAJ</h2>
+<p>Mindketten ugyanazt a szót kapjátok. A gyorsaság és pontosság dönt.</p>
+<button class="btn btn-main full" id="createRoom">SZOBAKÓD LÉTREHOZÁSA</button>
+</article>
+
+<article class="panel duel-option">
+<div class="mode-icon">✍</div>
+<small>02 / EGYSZER TE, EGYSZER ÉN</small>
+<h2>KIHÍVÁS PÁRBAJ</h2>
+<p>Adj fel egy saját szót az ellenfelednek, majd cseréljetek szerepet.</p>
+<button class="btn btn-outline full" id="challengeMode">KIHÍVÁS BEÁLLÍTÁSA</button>
+</article>
+
+</div>
+
+<div class="panel room-panel">
+<small>CSATLAKOZÁS MEGHÍVÓVAL</small>
+<h2>VAN MÁR SZOBAKÓDOD?</h2>
+<div class="room-join">
+<input id="roomCodeInput" maxlength="8" placeholder="PL. 7KQ2PX">
+<button class="btn btn-main" id="joinRoom">CSATLAKOZÁS</button>
+</div>
+<p id="duelStatus"></p>
+<div id="roomInfo" hidden></div>
+</div>
+
+</section>
+
+<!-- BAJNOKSÁG -->
+
+<section id="tournamentView" class="view">
+
+<div class="page-heading">
+<small>A LEGJOBBAK KÖZÖTT</small>
+<h1>TOURNAMENT</h1>
+<p>Bizonyítsd, hogy te vagy a szó mestere.</p>
+</div>
+
+<div class="panel coming-panel">
+<div>♛</div>
+<h2>AZ ARÉNA ÉPÜL</h2>
+<p>A valódi bajnokságkezelés a következő fejlesztési ütemben érkezik.</p>
+<button class="btn btn-main" data-mode="solo">GYAKORLÁS INDÍTÁSA</button>
+</div>
+
+</section>
+
+<!-- RANGLISTA -->
+
+<section id="rankingView" class="view">
+<div class="page-heading">
+<small>A SZÓBAJNOKOK CSARNOKA</small>
+<h1>HETI RANGLISTA</h1>
+</div>
+<div class="panel ranking-panel">
+<div id="rankingListFull"></div>
+</div>
+</section>
+
+<!-- PROFIL -->
+
+<section id="profileView" class="view">
+
+<div class="page-heading">
+<small>JÁTÉKOSKÁRTYA</small>
+<h1>SAJÁT PROFIL</h1>
+</div>
+
+<div class="panel profile-panel">
+<div class="profile-avatar" id="profileAvatar">?</div>
+<div>
+<h2 id="profileName">Vendég játékos</h2>
+<p id="profileEmail">Jelentkezz be a profilodhoz.</p>
+<div class="profile-stats">
+<span><b id="profileXp">0</b> XP</span>
+<span><b id="profileSolved">0</b> MEGFEJTÉS</span>
+<span><b id="profileWins">0</b> GYŐZELEM</span>
+</div>
+</div>
+</div>
+
+<div class="panel auth-panel">
+<div class="section-title compact">
+<div>
+<small>CSATLAKOZZ A KÖZÖSSÉGHEZ</small>
+<h2>JÁTÉKOS FIÓK</h2>
+</div>
+<span id="authState">VENDÉG</span>
+</div>
+
+<div class="auth-grid">
+<label>FELHASZNÁLÓNÉV
+<input id="authUsername" placeholder="Pl. WordHunter" maxlength="20">
+</label>
+<label>E-MAIL-CÍM
+<input id="authEmail" type="email" placeholder="nev@email.com">
+</label>
+<label>JELSZÓ
+<input id="authPassword" type="password" minlength="6" placeholder="Legalább 6 karakter">
+</label>
+</div>
+
+<div class="auth-actions">
+<button class="btn btn-main" id="registerButton">REGISZTRÁCIÓ</button>
+<button class="btn btn-outline" id="loginButton">BEJELENTKEZÉS</button>
+<button class="btn btn-outline" id="logoutButton" hidden>KIJELENTKEZÉS</button>
+</div>
+
+<p id="authMessage" class="form-message"></p>
+</div>
+</section>
+
+</main>
+
+<footer>
+<span>AKASZTÓFA <b>ONLINE</b></span>
+<span>GONDOLKODJ GYORSAN · TALÁLJ PONTOSAN</span>
+<span>© 2026</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<dialog id="howDialog" class="modal">
+<button class="modal-close" id="closeHow">×</button>
+<small>JÁTÉKSZABÁLYOK</small>
+<h2>HAT ESÉLYED VAN.</h2>
+<p>Találd ki a rejtett szót betűnként. Minden hibás tipp egy újabb részt rajzol az akasztófán. Ha minden betűt megfejtesz, nyersz; ha elfogy a hat esélyed, a szó felfedésre kerül.</p>
+<button class="btn btn-main" id="gotIt">ÉRTETTEM</button>
+</dialog>
+
+<script type="module" src="app.js"></script>
+
 </body>
 </html>
